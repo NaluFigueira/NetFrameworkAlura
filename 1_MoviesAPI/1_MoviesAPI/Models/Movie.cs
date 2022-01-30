@@ -16,6 +16,7 @@ namespace MoviesAPI.Models
             Horror
         }
 
+        public int Id { get; set; }
         [Required(ErrorMessage = "Title field is required")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Director field is required")]
