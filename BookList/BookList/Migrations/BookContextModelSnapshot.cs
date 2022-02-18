@@ -30,7 +30,7 @@ namespace BookList.Migrations
                     b.Property<byte[]>("Cover")
                         .HasColumnType("varbinary(4000)");
 
-                    b.Property<int?>("ListId")
+                    b.Property<int>("ListId")
                         .HasColumnType("int");
 
                     b.Property<string>("Subtitle")
@@ -69,7 +69,9 @@ namespace BookList.Migrations
                 {
                     b.HasOne("BookList.Models.List", null)
                         .WithMany("Books")
-                        .HasForeignKey("ListId");
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

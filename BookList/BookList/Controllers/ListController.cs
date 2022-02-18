@@ -5,6 +5,7 @@ using BookList.Data;
 using BookList.Data.DTOs;
 using BookList.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookList.Controllers
 {
@@ -50,7 +51,8 @@ namespace BookList.Controllers
         {
             if (_context.Lists.Any())
             {
-                return Ok(_context.Lists);
+                var resultWithBookList = _context.Lists.Include(list => list.Books).ToList();
+                return Ok(resultWithBookList);
             }
 
             return NotFound();
@@ -59,7 +61,9 @@ namespace BookList.Controllers
         [HttpGet("{id}")]
         public IActionResult GetList(int id)
         {
-            var list = _context.Lists.FirstOrDefault(list => list.Id == id);
+            var list = _context.Lists
+                            .Include(list => list.Books).ToList()
+                            .FirstOrDefault(list => list.Id == id);
 
             if (list != null)
             {

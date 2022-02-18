@@ -22,6 +22,8 @@ namespace BookList.Models
 
         public byte[] Cover { get; set; }
 
+        public int ListId { get; set; }
+
         public Book()
         {
         }

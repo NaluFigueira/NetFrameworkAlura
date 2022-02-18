@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookList.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220218003749_CreatingBooksTable")]
-    partial class CreatingBooksTable
+    [Migration("20220218010106_CreatingDatabase")]
+    partial class CreatingDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace BookList.Migrations
                     b.Property<byte[]>("Cover")
                         .HasColumnType("varbinary(4000)");
 
-                    b.Property<int?>("ListId")
+                    b.Property<int>("ListId")
                         .HasColumnType("int");
 
                     b.Property<string>("Subtitle")
@@ -71,7 +71,9 @@ namespace BookList.Migrations
                 {
                     b.HasOne("BookList.Models.List", null)
                         .WithMany("Books")
-                        .HasForeignKey("ListId");
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

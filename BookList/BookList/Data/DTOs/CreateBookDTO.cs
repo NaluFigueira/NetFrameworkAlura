@@ -18,5 +18,7 @@ namespace BookList.Data.DTOs
         public string Synopsis { get; set; }
 
         public byte[] Cover { get; set; }
+
+        public int ListId { get; set; }
     }
 }

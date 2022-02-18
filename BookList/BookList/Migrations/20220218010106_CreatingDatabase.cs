@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace BookList.Migrations
 {
-    public partial class CreatingBooksTable : Migration
+    public partial class CreatingDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,7 @@ namespace BookList.Migrations
                     Author = table.Column<string>(nullable: false),
                     Synopsis = table.Column<string>(nullable: true),
                     Cover = table.Column<byte[]>(nullable: true),
-                    ListId = table.Column<int>(nullable: true)
+                    ListId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace BookList.Migrations
                         column: x => x.ListId,
                         principalTable: "Lists",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

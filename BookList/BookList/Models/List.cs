@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookList.Models
 {
@@ -13,6 +14,7 @@ namespace BookList.Models
         [Required(ErrorMessage = "Title field is required")]
         public string Title { get; set; }
 
+        [ForeignKey("ListId")]
         public virtual ICollection<Book> Books { get; set; }
 
         public List()
