@@ -12,5 +12,6 @@ namespace BookList.Data
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<List> Lists { get; set; }
     }
 }

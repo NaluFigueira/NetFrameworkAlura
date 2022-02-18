@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookList.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20220216220658_CreatingBooksTable")]
+    [Migration("20220218003749_CreatingBooksTable")]
     partial class CreatingBooksTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,8 +32,8 @@ namespace BookList.Migrations
                     b.Property<byte[]>("Cover")
                         .HasColumnType("varbinary(4000)");
 
-                    b.Property<long>("ListId")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("ListId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Subtitle")
                         .HasColumnType("text");
@@ -47,7 +47,31 @@ namespace BookList.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ListId");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookList.Models.List", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Lists");
+                });
+
+            modelBuilder.Entity("BookList.Models.Book", b =>
+                {
+                    b.HasOne("BookList.Models.List", null)
+                        .WithMany("Books")
+                        .HasForeignKey("ListId");
                 });
 #pragma warning restore 612, 618
         }
