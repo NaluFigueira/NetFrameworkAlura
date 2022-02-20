@@ -3,10 +3,23 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace _1_MoviesAPI.Migrations
 {
-    public partial class CreatingMoviesTable : Migration
+    public partial class CreatingDatabaseWithMovieAndCinemaTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Cinemas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cinemas", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
@@ -26,6 +39,9 @@ namespace _1_MoviesAPI.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Cinemas");
+
             migrationBuilder.DropTable(
                 name: "Movies");
         }

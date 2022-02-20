@@ -8,8 +8,8 @@ using _1_MoviesAPI.Data;
 namespace _1_MoviesAPI.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220130224541_CreatingMoviesTable")]
-    partial class CreatingMoviesTable
+    [Migration("20220220174650_CreatingDatabaseWithMovieAndCinemaTables")]
+    partial class CreatingDatabaseWithMovieAndCinemaTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,21 @@ namespace _1_MoviesAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("_1_MoviesAPI.Models.Cinema", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cinemas");
                 });
 #pragma warning restore 612, 618
         }
