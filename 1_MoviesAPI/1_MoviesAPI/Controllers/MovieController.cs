@@ -31,11 +31,11 @@ namespace MoviesAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetMovieById(int id)
         {
-            Movie movie = _context.Movies.FirstOrDefault(movie => movie.Id == id);
+            var movie = _context.Movies.FirstOrDefault(movie => movie.Id == id);
 
             if (movie != null)
             {
-                GetMovieDTO getMovieDTO = _mapper.Map<GetMovieDTO>(movie);
+                var getMovieDTO = _mapper.Map<GetMovieDTO>(movie);
                 return Ok(getMovieDTO);
             }
             return NotFound();
@@ -45,7 +45,7 @@ namespace MoviesAPI.Controllers
         [HttpPost]
         public IActionResult CreateMovie([FromBody] CreateMovieDTO createMovieDTO)
         {
-            Movie newMovie = _mapper.Map<Movie>(createMovieDTO);
+            var newMovie = _mapper.Map<Movie>(createMovieDTO);
 
             _context.Movies.Add(newMovie);
             _context.SaveChanges();
@@ -56,7 +56,7 @@ namespace MoviesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieDTO updateMovieDTO)
         {
-            Movie movie = _context.Movies.FirstOrDefault(movie => movie.Id == id);
+            var movie = _context.Movies.FirstOrDefault(movie => movie.Id == id);
 
             if (movie != null)
             {
@@ -72,7 +72,7 @@ namespace MoviesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteMovie(int id)
         {
-            Movie movie = _context.Movies.FirstOrDefault(movie => movie.Id == id);
+            var movie = _context.Movies.FirstOrDefault(movie => movie.Id == id);
 
             if (movie != null)
             {

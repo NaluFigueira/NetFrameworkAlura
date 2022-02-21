@@ -15,6 +15,13 @@
     <None Remove="Migrations\" />
     <None Remove="Data\DTOs\Movie\" />
     <None Remove="Data\DTOs\Cinema\" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="mono_crash.mem.1019.70000733e000.blob" />
+    <None Remove="mono_crash.mem.1019.10f5bb600.blob" />
+    <None Remove="mono_crash.mem.1019.1.blob" />
+    <None Remove="mono_crash.mem.1019.7000049b9000.blob" />
+    <None Remove="AutoMapper.Extensions.ExpressionMapping" />
+    <None Remove="Data\DTOs\Address\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -22,6 +29,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="Data\DTOs\Movie\" />
     <Folder Include="Data\DTOs\Cinema\" />
+    <Folder Include="Data\DTOs\Address\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
@@ -31,5 +39,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 </Project>

@@ -41,6 +41,26 @@ namespace _1_MoviesAPI.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("_1_MoviesAPI.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Neighborhood")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("_1_MoviesAPI.Models.Cinema", b =>
                 {
                     b.Property<int>("Id")
