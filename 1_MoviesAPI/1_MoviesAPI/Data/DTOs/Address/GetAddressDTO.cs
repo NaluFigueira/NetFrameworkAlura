@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace _1_MoviesAPI.Data.DTOs.Address
+namespace _1_MoviesAPI.Data.DTOs
 {
     public class GetAddressDTO
     {

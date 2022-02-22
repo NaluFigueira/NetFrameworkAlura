@@ -14,5 +14,7 @@ namespace _1_MoviesAPI.Models
         public string Neighborhood { get; set; }
 
         public int Number { get; set; }
+
+        public Cinema Cinema { get; set; }
     }
 }

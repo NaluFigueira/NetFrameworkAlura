@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using _1_MoviesAPI.Data;
-using _1_MoviesAPI.Data.DTOs.Address;
+using _1_MoviesAPI.Data.DTOs;
 using _1_MoviesAPI.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

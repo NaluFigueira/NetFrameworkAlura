@@ -11,5 +11,9 @@ namespace _1_MoviesAPI.Models
 
         [Required(ErrorMessage = "Name field is required")]
         public string Name { get; set; }
+
+        public Address Address { get; set; }
+
+        public int AddressId { get; set; }
     }
 }

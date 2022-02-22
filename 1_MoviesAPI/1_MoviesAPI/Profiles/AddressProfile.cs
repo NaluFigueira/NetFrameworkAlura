@@ -1,5 +1,5 @@
 ﻿using System;
-using _1_MoviesAPI.Data.DTOs.Address;
+using _1_MoviesAPI.Data.DTOs;
 using _1_MoviesAPI.Models;
 using AutoMapper;
 
