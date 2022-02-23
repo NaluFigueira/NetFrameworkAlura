@@ -26,7 +26,7 @@ namespace _1_MoviesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MovieContext>(opts => opts.UseMySQL(Configuration.GetConnectionString("BookConnection")));
+            services.AddDbContext<MovieContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("BookConnection")));
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

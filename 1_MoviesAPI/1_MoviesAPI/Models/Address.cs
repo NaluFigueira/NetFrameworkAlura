@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace _1_MoviesAPI.Models
 {
@@ -15,6 +16,7 @@ namespace _1_MoviesAPI.Models
 
         public int Number { get; set; }
 
-        public Cinema Cinema { get; set; }
+        [JsonIgnore]
+        public virtual Cinema Cinema { get; set; }
     }
 }

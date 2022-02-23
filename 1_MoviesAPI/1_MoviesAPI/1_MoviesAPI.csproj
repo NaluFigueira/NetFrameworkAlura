@@ -22,6 +22,8 @@
     <None Remove="mono_crash.mem.1019.7000049b9000.blob" />
     <None Remove="AutoMapper.Extensions.ExpressionMapping" />
     <None Remove="Data\DTOs\Address\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
+    <None Remove="Data\DTOs\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -30,6 +32,7 @@
     <Folder Include="Data\DTOs\Movie\" />
     <Folder Include="Data\DTOs\Cinema\" />
     <Folder Include="Data\DTOs\Address\" />
+    <Folder Include="Data\DTOs\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
@@ -40,5 +43,6 @@
     </PackageReference>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.10" />
   </ItemGroup>
 </Project>
