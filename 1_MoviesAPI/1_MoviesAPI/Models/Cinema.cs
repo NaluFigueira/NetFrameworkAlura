@@ -15,5 +15,9 @@ namespace _1_MoviesAPI.Models
         public virtual Address Address { get; set; }
 
         public int AddressId { get; set; }
+
+        public virtual Manager Manager { get; set; }
+
+        public int ManagerId { get; set; }
     }
 }
