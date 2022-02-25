@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using _1_MoviesAPI.Data;
 using _1_MoviesAPI.Data.DTOs;
 using _1_MoviesAPI.Models;

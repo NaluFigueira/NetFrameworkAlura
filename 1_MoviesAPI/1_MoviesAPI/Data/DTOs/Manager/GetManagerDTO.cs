@@ -8,6 +8,6 @@ namespace _1_MoviesAPI.Data.DTOs
     {
         public string Name { get; set; }
 
-        public List<Cinema> Cinemas { get; set; }
+        public object Cinemas { get; set; }
     }
 }

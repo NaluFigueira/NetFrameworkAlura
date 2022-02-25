@@ -22,7 +22,8 @@ namespace _1_MoviesAPI.Data
             builder.Entity<Cinema>()
                 .HasOne(cinema => cinema.Manager)
                 .WithMany(manager => manager.Cinemas)
-                .HasForeignKey(cinema => cinema.ManagerId);
+                .HasForeignKey(cinema => cinema.ManagerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Movie> Movies { get; set; }
