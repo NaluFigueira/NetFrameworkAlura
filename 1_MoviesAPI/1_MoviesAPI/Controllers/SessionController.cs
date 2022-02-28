@@ -26,7 +26,8 @@ namespace _1_MoviesAPI.Controllers
         [HttpGet]
         public IActionResult GetSessions()
         {
-            return Ok(_context.Sessions);
+            var sessions = _context.Sessions.ToList();
+            return Ok(_mapper.Map<List<GetSessionDTO>>(sessions));
         }
 
         [HttpGet("{id}")]

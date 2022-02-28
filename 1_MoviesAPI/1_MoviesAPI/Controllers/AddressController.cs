@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _1_MoviesAPI.Data;
 using _1_MoviesAPI.Data.DTOs;
@@ -24,7 +25,8 @@ namespace _1_MoviesAPI.Controllers
         [HttpGet]
         public IActionResult GetAddresses()
         {
-            return Ok(_context.Addresses);
+            var addresses = _context.Addresses.ToList();
+            return Ok(_mapper.Map<List<GetAddressDTO>>(addresses));
         }
 
         [HttpGet("{id}")]

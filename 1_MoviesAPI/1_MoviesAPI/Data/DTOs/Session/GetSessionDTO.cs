@@ -7,6 +7,8 @@ namespace _1_MoviesAPI.Data.DTOs
 {
     public class GetSessionDTO
     {
+        public int Id { get; set; }
+
         public Cinema Cinema { get; set; }
 
         public Movie Movie { get; set; }

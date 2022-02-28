@@ -26,7 +26,8 @@ namespace _1_MoviesAPI.Controllers
         [HttpGet]
         public IActionResult GetCinemas()
         {
-            return Ok(_context.Cinemas);
+            var cinemas = _context.Cinemas.ToList();
+            return Ok(_mapper.Map<List<GetCinemaDTO>>(cinemas));
         }
 
         [HttpGet("{id}")]
@@ -36,7 +37,7 @@ namespace _1_MoviesAPI.Controllers
 
             if(cinema != null)
             {
-                var getCinemaDTO = _mapper.Map<GetCinemaDTO>(cinema);
+                var getCinemaDTO = _mapper.Map<GetManagerDTO>(cinema);
                 return Ok(getCinemaDTO);
             }
 

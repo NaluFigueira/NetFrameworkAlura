@@ -6,6 +6,8 @@ namespace _1_MoviesAPI.Data.DTOs
 {
     public class GetMovieDTO
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Title field is required")]
         public string Title { get; set; }
 

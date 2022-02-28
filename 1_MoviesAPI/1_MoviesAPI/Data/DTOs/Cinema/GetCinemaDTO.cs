@@ -5,6 +5,8 @@ namespace _1_MoviesAPI.Data.DTOs
 {
     public class GetCinemaDTO
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public Address Address { get; set; }
