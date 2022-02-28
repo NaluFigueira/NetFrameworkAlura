@@ -6,6 +6,7 @@ using System.Linq;
 using _1_MoviesAPI.Data;
 using _1_MoviesAPI.Data.DTOs;
 using AutoMapper;
+using static MoviesAPI.Models.Movie;
 
 namespace MoviesAPI.Controllers
 {
@@ -23,9 +24,27 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Movie> GetMovies()
+        public IActionResult GetMovies([FromQuery] MovieGenre? genre = null)
         {
-            return _context.Movies;
+            List<Movie> movies;
+
+            if(genre != null)
+            {
+                movies = _context.Movies.Where(movie => movie.Genre == genre).ToList();
+            }
+            else
+            {
+                movies = _context.Movies.ToList();
+            }
+
+            if(movies != null)
+            {
+                List<GetMovieDTO> getMovieDTOs = _mapper.Map<List<GetMovieDTO>>(movies);
+
+                return Ok(getMovieDTOs);
+            }
+
+            return NotFound();
         }
 
         [HttpGet("{id}")]
