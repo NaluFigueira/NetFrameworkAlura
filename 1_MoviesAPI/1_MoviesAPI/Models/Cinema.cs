@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace _1_MoviesAPI.Models
 {
@@ -19,5 +21,8 @@ namespace _1_MoviesAPI.Models
         public virtual Manager Manager { get; set; }
 
         public int ManagerId { get; set; }
+
+        [JsonIgnore]
+        public virtual List<Session> Sessions { get; set; }
     }
 }

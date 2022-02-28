@@ -24,6 +24,7 @@
     <None Remove="Data\DTOs\Address\" />
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="Data\DTOs\Manager\" />
+    <None Remove="Data\DTOs\Cinema %28copiar%29\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -33,6 +34,7 @@
     <Folder Include="Data\DTOs\Cinema\" />
     <Folder Include="Data\DTOs\Address\" />
     <Folder Include="Data\DTOs\Manager\" />
+    <Folder Include="Data\DTOs\Session\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
