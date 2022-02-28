@@ -24,9 +24,23 @@ namespace _1_MoviesAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCinemas()
+        public IActionResult GetCinemas([FromQuery] string? movieTitle = null)
         {
             var cinemas = _context.Cinemas.ToList();
+            if(cinemas == null)
+            {
+                NotFound();
+            }
+
+            if(!string.IsNullOrEmpty(movieTitle))
+            {
+                var query = from cinema in cinemas
+                        where cinema.Sessions.Any(session =>
+                        session.Movie.Title == movieTitle)
+                        select cinema;
+                cinemas = query.ToList();
+
+            }
             return Ok(_mapper.Map<List<GetCinemaDTO>>(cinemas));
         }
 
