@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using _1_MoviesAPI.Data;
 using _1_MoviesAPI.Data.DTOs;
 using _1_MoviesAPI.Models;
-using AutoMapper;
+using _1_MoviesAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _1_MoviesAPI.Controllers
@@ -14,32 +12,29 @@ namespace _1_MoviesAPI.Controllers
     [Route("[controller]")]
     public class SessionController : ControllerBase
     {
-        private MovieContext _context;
-        private IMapper _mapper;
+        private SessionService _service;
 
-        public SessionController(MovieContext context, IMapper mapper)
+        public SessionController(SessionService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetSessions()
         {
-            var sessions = _context.Sessions.ToList();
-            return Ok(_mapper.Map<List<GetSessionDTO>>(sessions));
+            List<GetSessionDTO> foundSessions = _service.GetSessions();
+
+            if(foundSessions != null) return Ok(foundSessions);
+
+            return NotFound();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetSessionById(int id)
         {
-            var session = _context.Sessions.FirstOrDefault(session => session.Id == id);
+            GetSessionDTO foundSession = _service.GetSessionById(id);
 
-            if(session != null)
-            {
-                var getSessionDTO = _mapper.Map<GetSessionDTO>(session);
-                return Ok(getSessionDTO);
-            }
+            if (foundSession != null) return Ok(foundSession);
 
             return NotFound();
         }
@@ -47,33 +42,22 @@ namespace _1_MoviesAPI.Controllers
         [HttpPost]
         public IActionResult CreateSession([FromBody] CreateSessionDTO createSessionDTO)
         {
-            var sessionMovie = _context.Movies.FirstOrDefault(movie => movie.Id == createSessionDTO.MovieID);
+            Session createdSession = _service.CreateSession(createSessionDTO);
 
-            if(sessionMovie != null)
+            if(createdSession != null)
             {
-
-                var newSession = _mapper.Map<Session>(createSessionDTO);
-                newSession.EndTime = newSession.StartTime.AddMinutes(sessionMovie.Duration);
-                _context.Sessions.Add(newSession);
-                _context.SaveChanges();
-                return CreatedAtAction(nameof(GetSessionById), new { Id = newSession.Id }, newSession);
+                return CreatedAtAction(nameof(GetSessionById), new { Id = createdSession.Id }, createdSession);
             }
 
-            return NotFound();
+            return NotFound(new NotFoundObjectResult( new { Error = "Movie ID or cinema ID not found" }));
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateSession(int id, [FromBody] UpdateSessionDTO updateSessionDTO)
         {
-            var session = _context.Sessions.FirstOrDefault(session => session.Id == id);
+            Result result = _service.UpdateSession(id, updateSessionDTO);
 
-            if(session != null)
-            {
-                _mapper.Map(updateSessionDTO, session);
-                _context.SaveChanges();
-
-                return NoContent();
-            }
+            if (result.IsSuccess) return NoContent();
 
             return NotFound();
         }
@@ -81,15 +65,9 @@ namespace _1_MoviesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteSession(int id)
         {
-            var session = _context.Cinemas.FirstOrDefault(session => session.Id == id);
+            Result result = _service.DeleteSession(id);
 
-            if (session != null)
-            {
-                _context.Remove(session);
-                _context.SaveChanges();
-
-                return NoContent();
-            }
+            if (result.IsSuccess) return NoContent();
 
             return NotFound();
         }

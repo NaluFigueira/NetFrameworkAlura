@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using _1_MoviesAPI.Data;
 using _1_MoviesAPI.Data.DTOs;
 using _1_MoviesAPI.Models;
-using AutoMapper;
+using _1_MoviesAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _1_MoviesAPI.Controllers
@@ -13,33 +12,29 @@ namespace _1_MoviesAPI.Controllers
     [Route("[controller]")]
     public class ManagerController : ControllerBase
     {
-        private MovieContext _context;
-        private IMapper _mapper;
+        private ManagerService _service;
 
-        public ManagerController(MovieContext context, IMapper mapper)
+        public ManagerController(ManagerService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetAllManagers()
         {
-            var managers = _context.Managers.ToList();
-            return Ok(_mapper.Map<List<GetManagerDTO>>(managers));
+            List<GetManagerDTO> foundManagers = _service.GetAllManagers();
+
+            if(foundManagers != null) return Ok(foundManagers);
+
+            return NotFound();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetManagerById(int id)
         {
-            var manager = _context.Managers.FirstOrDefault(manager => manager.Id == id);
+            GetManagerDTO foundManager = _service.GetManagerById(id);
 
-            if(manager != null)
-            {
-                var getManagerDTO = _mapper.Map<GetManagerDTO>(manager);
-
-                return Ok(getManagerDTO);
-            }
+            if(foundManager != null) return Ok(foundManager);
 
             return NotFound();
 
@@ -48,28 +43,17 @@ namespace _1_MoviesAPI.Controllers
         [HttpPost]
         public IActionResult CreateManager([FromBody] CreateManagerDTO createManagerDTO)
         {
-            var manager = _mapper.Map<Manager>(createManagerDTO);
+            Manager createdManager = _service.CreateManager(createManagerDTO);
 
-            _context.Add(manager);
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetManagerById), new { Id = manager.Id }, manager);
+            return CreatedAtAction(nameof(GetManagerById), new { Id = createdManager.Id }, createdManager);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateManager(int id, [FromBody] UpdateManagerDTO updateManagerDTO)
         {
-            var manager = _context.Managers.FirstOrDefault(manager => manager.Id == id);
+            Result result = _service.UpdateManager(id, updateManagerDTO);
 
-            if (manager != null)
-            {
-                _mapper.Map(updateManagerDTO, manager);
-                var getManagerDTO = _mapper.Map<GetManagerDTO>(manager);
-
-                _context.SaveChanges();
-
-                return NoContent();
-            }
+            if (result.IsSuccess) return NoContent();
 
             return NotFound();
         }
@@ -77,15 +61,9 @@ namespace _1_MoviesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteManager(int id)
         {
-            var manager = _context.Managers.FirstOrDefault(manager => manager.Id == id);
+            Result result = _service.DeleteManager(id);
 
-            if (manager != null)
-            {
-                _context.Remove(manager);
-                _context.SaveChanges();
-
-                return NoContent();
-            }
+            if (result.IsSuccess) return NoContent();
 
             return NotFound();
         }

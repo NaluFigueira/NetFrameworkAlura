@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using _1_MoviesAPI.Data;
 using _1_MoviesAPI.Data.DTOs;
 using _1_MoviesAPI.Models;
-using AutoMapper;
+using _1_MoviesAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _1_MoviesAPI.Controllers
@@ -13,32 +12,29 @@ namespace _1_MoviesAPI.Controllers
     [Route("[controller]")]
     public class AddressController : ControllerBase
     {
-        private MovieContext _context;
-        private IMapper _mapper;
+        private AddressService _service;
 
-        public AddressController(MovieContext context, IMapper mapper)
+        public AddressController(AddressService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetAddresses()
         {
-            var addresses = _context.Addresses.ToList();
-            return Ok(_mapper.Map<List<GetAddressDTO>>(addresses));
+            List<GetAddressDTO> foundAddresses = _service.GetAddresses();
+
+            if(foundAddresses != null) return Ok(foundAddresses);
+
+            return NotFound();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetAddressById(int id)
         {
-            var address = _context.Addresses.FirstOrDefault(address => address.Id == id);
+            GetAddressDTO foundAddress = _service.GetAddressById(id);
 
-            if(address != null)
-            {
-                var getAddressDTO = _mapper.Map<GetAddressDTO>(address);
-                return Ok(getAddressDTO);
-            }
+            if(foundAddress != null) return Ok(foundAddress);
 
             return NotFound();
         }
@@ -46,25 +42,17 @@ namespace _1_MoviesAPI.Controllers
         [HttpPost]
         public IActionResult CreateAddress([FromBody] CreateAddressDTO createAddressDTO)
         {
-            var address = _mapper.Map<Address>(createAddressDTO);
-            _context.Addresses.Add(address);
-            _context.SaveChanges();
+            Address createdAddress = _service.CreateAddress(createAddressDTO);
 
-            return CreatedAtAction(nameof(GetAddressById), new { Id = address.Id }, address);
+            return CreatedAtAction(nameof(GetAddressById), new { Id = createdAddress.Id }, createdAddress);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateAddress(int id, [FromBody] UpdateAddressDTO updateAddressDTO)
         {
-            var address = _context.Addresses.FirstOrDefault(address => address.Id == id);
+            Result result = _service.UpdateAddress(id, updateAddressDTO);
 
-            if (address != null)
-            {
-                _mapper.Map(updateAddressDTO, address);
-                _context.SaveChanges();
-
-                return NoContent();
-            }
+            if (result.IsSuccess) return NoContent();
 
             return NotFound();
         }
@@ -72,15 +60,9 @@ namespace _1_MoviesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteAddress(int id)
         {
-            var address = _context.Addresses.FirstOrDefault(address => address.Id == id);
+            Result result = _service.DeleteAddress(id);
 
-            if (address != null)
-            {
-                _context.Remove(address);
-                _context.SaveChanges();
-
-                return NoContent();
-            }
+            if (result.IsSuccess) return NoContent();
 
             return NotFound();
         }

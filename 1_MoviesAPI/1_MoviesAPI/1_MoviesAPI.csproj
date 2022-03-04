@@ -25,6 +25,9 @@
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="Data\DTOs\Manager\" />
     <None Remove="Data\DTOs\Cinema %28copiar%29\" />
+    <None Remove="Services\" />
+    <None Remove="FluentResults" />
+    <None Remove="Microsoft.AspNet.WebApi" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -35,6 +38,7 @@
     <Folder Include="Data\DTOs\Address\" />
     <Folder Include="Data\DTOs\Manager\" />
     <Folder Include="Data\DTOs\Session\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
@@ -46,5 +50,6 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.10" />
+    <PackageReference Include="FluentResults" Version="3.2.0" />
   </ItemGroup>
 </Project>

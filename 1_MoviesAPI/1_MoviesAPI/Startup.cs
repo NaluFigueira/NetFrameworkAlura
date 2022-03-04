@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _1_MoviesAPI.Data;
+using _1_MoviesAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,11 @@ namespace _1_MoviesAPI
             services.AddDbContext<MovieContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("BookConnection")));
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<AddressService, AddressService>();
+            services.AddScoped<CinemaService, CinemaService>();
+            services.AddScoped<ManagerService, ManagerService>();
+            services.AddScoped<MovieService, MovieService>();
+            services.AddScoped<SessionService, SessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
