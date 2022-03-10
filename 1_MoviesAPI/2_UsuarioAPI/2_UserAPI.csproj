@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.10" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="FluentResults" Version="3.2.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +40,8 @@
     <None Remove="MySql.Data.EntityFrameworkCore" />
     <None Remove="Services\" />
     <None Remove="FluentResults" />
+    <None Remove="Data\Requets\" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -47,5 +50,6 @@
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
     <Folder Include="Services\" />
+    <Folder Include="Data\Requests\" />
   </ItemGroup>
 </Project>
