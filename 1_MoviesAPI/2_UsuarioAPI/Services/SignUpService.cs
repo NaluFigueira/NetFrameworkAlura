@@ -30,10 +30,10 @@ namespace _2_UsuarioAPI.Services
 
             if(identityResult.Result.Succeeded)
             {
-                return Result.Ok();
+                return Result.Ok().WithSuccess("User was created.");
             }
 
-            return Result.Fail("There was an error when creating the user");
+            return Result.Fail("There was an error when creating the user, check input parameters and try again.");
         }
     }
 }

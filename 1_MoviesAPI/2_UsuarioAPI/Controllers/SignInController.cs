@@ -22,9 +22,12 @@ namespace _2_UsuarioAPI.Controllers
         {
             Result result = _signInService.SignIn(signInRequest);
 
-            if (result.IsSuccess) return Ok();
+            if (result.IsSuccess)
+            {
+                return Ok(result.Successes[0]);
+            }
 
-            return Unauthorized();
+            return Unauthorized(result.Errors[0]);
         }
     }
 }

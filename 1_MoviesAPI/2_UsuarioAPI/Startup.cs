@@ -39,6 +39,8 @@ namespace _2_UserAPI
                 .AddEntityFrameworkStores<UserDBContext>();
             services.AddScoped<SignUpService, SignUpService>();
             services.AddScoped<SignInService, SignInService>();
+            services.AddScoped<TokenService, TokenService>();
+            services.AddScoped<SignOutService, SignOutService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

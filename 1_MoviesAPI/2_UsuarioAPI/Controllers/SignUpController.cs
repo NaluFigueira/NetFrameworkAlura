@@ -22,9 +22,9 @@ namespace _2_UserAPI.Controllers
         {
             Result result = _service.CreateUser(createUserDTO);
 
-            if (result.IsSuccess) return Ok();
+            if (result.IsSuccess) return Ok(result.Successes[0]);
 
-            return StatusCode(500);
+            return BadRequest(result.Errors[0]);
         }
     }
 }
