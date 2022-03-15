@@ -32,7 +32,10 @@ namespace _2_UsuarioAPI.Services
                 Token token = _tokenService.CreateToken(identityUser);
                 return Result.Ok().WithSuccess(token.Value);
             }
-
+            if(identityResult.Result.IsNotAllowed)
+            {
+                return Result.Fail("Needs e-mail confirmation to sign in");
+            }
             return Result.Fail("Invalid username and password.");
         }
     }

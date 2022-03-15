@@ -21,6 +21,8 @@
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="FluentResults" Version="3.2.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+    <PackageReference Include="MailKit" Version="3.1.1" />
+    <PackageReference Include="MimeKit" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +44,8 @@
     <None Remove="FluentResults" />
     <None Remove="Data\Requets\" />
     <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="MailKit" />
+    <None Remove="MimeKit" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

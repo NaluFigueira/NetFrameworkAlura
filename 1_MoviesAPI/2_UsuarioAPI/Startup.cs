@@ -35,12 +35,16 @@ namespace _2_UserAPI
             services.AddDbContext<UserDBContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("UserConnection"))
             );
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
-                .AddEntityFrameworkStores<UserDBContext>();
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+                    opt => opt.SignIn.RequireConfirmedEmail = true
+                )
+                .AddEntityFrameworkStores<UserDBContext>()
+                .AddDefaultTokenProviders();
             services.AddScoped<SignUpService, SignUpService>();
             services.AddScoped<SignInService, SignInService>();
             services.AddScoped<TokenService, TokenService>();
             services.AddScoped<SignOutService, SignOutService>();
+            services.AddScoped<EmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
