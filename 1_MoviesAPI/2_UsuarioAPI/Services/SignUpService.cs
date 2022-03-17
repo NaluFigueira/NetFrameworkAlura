@@ -17,12 +17,14 @@ namespace _2_UsuarioAPI.Services
         private UserManager<IdentityUser<int>> _userManager;
         private IMapper _mapper;
         private EmailService _emailService;
+        private RoleManager<IdentityRole<int>> _roleManager;
 
-        public SignUpService(UserManager<IdentityUser<int>> userManager, IMapper mapper, EmailService emailService)
+        public SignUpService(UserManager<IdentityUser<int>> userManager, IMapper mapper, EmailService emailService, RoleManager<IdentityRole<int>> roleManager)
         {
             _userManager = userManager;
             _mapper = mapper;
             _emailService = emailService;
+            _roleManager = roleManager;
         }
 
         public Result CreateUser(CreateUserDTO createUserDTO)
@@ -32,6 +34,12 @@ namespace _2_UsuarioAPI.Services
 
             Task<IdentityResult> identityResult =
                 _userManager.CreateAsync(identityUser, createUserDTO.Password);
+
+            var createRoleResult = _roleManager
+                .CreateAsync(new IdentityRole<int>("admin")).Result;
+
+            var userRoleResult = _userManager
+                .AddToRoleAsync(identityUser, "admin").Result;
 
             if(identityResult.Result.Succeeded)
             {
