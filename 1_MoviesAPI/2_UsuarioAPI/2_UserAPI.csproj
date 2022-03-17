@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>_2_UsuarioAPI</RootNamespace>
+    <UserSecretsId>ce7eb044-db42-40de-94eb-84acfab4a9ab</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

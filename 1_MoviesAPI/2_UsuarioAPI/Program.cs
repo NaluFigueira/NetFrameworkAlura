@@ -21,6 +21,9 @@ namespace _2_UserAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            .ConfigureAppConfiguration(
+                (context, builder) => builder.AddUserSecrets<Program>()
+             );
     }
 }

@@ -21,6 +21,9 @@ namespace _1_MoviesAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            .ConfigureAppConfiguration(
+                (context, builder) => builder.AddUserSecrets<Program>()
+             );
     }
 }

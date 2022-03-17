@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>_1_MoviesAPI</RootNamespace>
+    <UserSecretsId>5bba2f2c-2e1f-4ed0-a327-67fc03c1f58d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
