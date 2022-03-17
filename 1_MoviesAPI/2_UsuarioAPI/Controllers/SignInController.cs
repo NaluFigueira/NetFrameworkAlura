@@ -29,5 +29,32 @@ namespace _2_UsuarioAPI.Controllers
 
             return Unauthorized(result.Errors[0]);
         }
+
+        [HttpPost("/generate-password-reset-code")]
+        public IActionResult GeneratePasswordResetCode(GeneratePasswordResetCodeRequest request)
+        {
+            Result result = _signInService.GeneratePasswordResetCode(request);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Successes[0]);
+            }
+
+            return Unauthorized(result.Errors[0]);
+        }
+
+        [HttpPost("/password-reset")]
+        public IActionResult PasswordReset(PasswordResetRequest request)
+        {
+            Result result = _signInService.PasswordReset(request);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Successes[0]);
+            }
+
+            return Unauthorized(result.Errors[0]);
+        }
+
     }
 }

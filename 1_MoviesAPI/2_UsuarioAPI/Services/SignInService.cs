@@ -38,5 +38,50 @@ namespace _2_UsuarioAPI.Services
             }
             return Result.Fail("Invalid username and password.");
         }
+
+        public Result PasswordReset(PasswordResetRequest request)
+        {
+            IdentityUser<int> identityUser = GetIdentityUserByEmail(request.Email);
+
+            if (identityUser != null)
+            {
+                IdentityResult identityResult = _signInManager
+                .UserManager
+                .ResetPasswordAsync(identityUser, request.Token, request.Password)
+                .Result;
+
+                if (identityResult.Succeeded)
+                {
+                    return Result.Ok().WithSuccess("Password reset successful!");
+                }
+            }
+
+            return Result.Fail("Invalid user e-mail or invalid token");
+
+        }
+
+        public Result GeneratePasswordResetCode(GeneratePasswordResetCodeRequest request)
+        {
+            IdentityUser<int> identityUser = GetIdentityUserByEmail(request.Email);
+
+            if (identityUser != null)
+            {
+                string resetCode = _signInManager
+                    .UserManager.GeneratePasswordResetTokenAsync(identityUser).Result;
+
+                return Result.Ok().WithSuccess(resetCode);
+            }
+
+            return Result.Fail("Invalid user e-mail");
+        }
+
+        private IdentityUser<int> GetIdentityUserByEmail(string email)
+        {
+            return _signInManager
+                            .UserManager
+                            .Users
+                            .FirstOrDefault(user => user.NormalizedEmail == email.ToUpper());
+        }
+
     }
 }
