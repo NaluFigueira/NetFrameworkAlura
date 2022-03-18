@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _2_UsuarioAPI.Data;
 
 namespace _2_UsuarioAPI.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    partial class UserDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220318180859_CreatingAdmin")]
+    partial class CreatingAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,16 +70,9 @@ namespace _2_UsuarioAPI.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "a4fdacec-7ed3-4857-a3fd-ccab789ba310",
+                            ConcurrencyStamp = "fce05a7b-8f44-44a8-8564-2a62e02eefc0",
                             Name = "admin",
                             NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = 99997,
-                            ConcurrencyStamp = "efd74408-67d2-4be8-8be9-ac4026033c8a",
-                            Name = "regular",
-                            NormalizedName = "REGULAR"
                         });
                 });
 
@@ -225,15 +220,15 @@ namespace _2_UsuarioAPI.Migrations
                         {
                             Id = 99999,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de37ef90-6249-4d3b-b6a9-b5c0197eda26",
+                            ConcurrencyStamp = "9cba664d-84ff-488a-8c11-9b89198c45e4",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPWm9euFItzXvFGYM8b9axqYDMzUDHrgM9YbbP73NKEARdXi/DGBZUhUeGn5rhcWjg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFtxUVUd8AOdqF3KbCAlpcI9Tx/uXdP6f7EKdojzoWzcBJHL7k0gFFvWLn/SYoT8QA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "46de0073-1ac0-46bc-87c9-aa47ba83012c",
+                            SecurityStamp = "628f275f-9900-4b38-b0f9-723e8030b946",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
