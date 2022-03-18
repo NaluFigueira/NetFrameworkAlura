@@ -29,6 +29,8 @@
     <None Remove="Services\" />
     <None Remove="FluentResults" />
     <None Remove="Microsoft.AspNet.WebApi" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Microsoft.AspNetCore.Authorization" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -52,5 +54,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.10" />
     <PackageReference Include="FluentResults" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.0" />
   </ItemGroup>
 </Project>

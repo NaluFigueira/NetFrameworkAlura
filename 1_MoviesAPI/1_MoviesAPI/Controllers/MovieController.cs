@@ -5,6 +5,7 @@ using _1_MoviesAPI.Data.DTOs;
 using static MoviesAPI.Models.Movie;
 using _1_MoviesAPI.Services;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MoviesAPI.Controllers
 {
@@ -41,6 +42,7 @@ namespace MoviesAPI.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult CreateMovie([FromBody] CreateMovieDTO createMovieDTO)
         {
             GetMovieDTO createdMovie = _service.CreateMovie(createMovieDTO);
