@@ -6,6 +6,7 @@ using _2_UserAPI.Data.DTOs;
 using _2_UserAPI.Models;
 using _2_UsuarioAPI.Data;
 using _2_UsuarioAPI.Data.Requests;
+using _2_UsuarioAPI.Models;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
@@ -14,12 +15,12 @@ namespace _2_UsuarioAPI.Services
 {
     public class SignUpService
     {
-        private UserManager<IdentityUser<int>> _userManager;
+        private UserManager<CustomIdentityUser> _userManager;
         private IMapper _mapper;
         private EmailService _emailService;
         private RoleManager<IdentityRole<int>> _roleManager;
 
-        public SignUpService(UserManager<IdentityUser<int>> userManager, IMapper mapper, EmailService emailService, RoleManager<IdentityRole<int>> roleManager)
+        public SignUpService(UserManager<CustomIdentityUser> userManager, IMapper mapper, EmailService emailService, RoleManager<IdentityRole<int>> roleManager)
         {
             _userManager = userManager;
             _mapper = mapper;
@@ -30,7 +31,7 @@ namespace _2_UsuarioAPI.Services
         public Result CreateUser(CreateUserDTO createUserDTO)
         {
             User user = _mapper.Map<User>(createUserDTO);
-            IdentityUser<int> identityUser = _mapper.Map<IdentityUser<int>>(user);
+            CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
 
             Task<IdentityResult> identityResult =
                 _userManager.CreateAsync(identityUser, createUserDTO.Password);

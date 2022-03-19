@@ -18,5 +18,8 @@ namespace _2_UserAPI.Data.DTOs
         [Required]
         [Compare("Password")]
         public string RePassword { get; set; }
+
+        [Required]
+        public DateTime BirthDate { get; set; }
     }
 }

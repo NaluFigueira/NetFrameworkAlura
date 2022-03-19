@@ -10,13 +10,14 @@ namespace _2_UsuarioAPI.Services
 {
     public class TokenService
     {
-        public Token CreateToken(IdentityUser<int> user, string role)
+        public Token CreateToken(CustomIdentityUser user, string role)
         {
             Claim[] userRights = new Claim[]
             {
                 new Claim("username", user.UserName),
                 new Claim("id", user.Id.ToString()),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.DateOfBirth, user.BirthDate.ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("asdpajsdpoajdojcojopajcm"));

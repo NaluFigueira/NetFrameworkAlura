@@ -21,7 +21,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin, regular")]
+        [Authorize(Roles = "admin, regular", Policy = "MinimumAge")]
         public IActionResult GetMovies([FromQuery] MovieGenre? genre = null)
         {
             List<GetMovieDTO> foundMovies = _service.GetMovies(genre);
@@ -32,7 +32,7 @@ namespace MoviesAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin, regular")]
+        [Authorize(Roles = "admin, regular", Policy = "MinimumAge")]
         public IActionResult GetMovieById(int id)
         {
             GetMovieDTO foundMovie = _service.GetMovieById(id);

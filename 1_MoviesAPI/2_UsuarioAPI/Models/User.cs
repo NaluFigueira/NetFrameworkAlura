@@ -8,5 +8,7 @@ namespace _2_UserAPI.Models
         public string Username { get; set; }
 
         public string Email { get; set; }
+
+        public DateTime BirthDate { get; set; }
     }
 }

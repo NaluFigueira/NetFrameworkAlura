@@ -1,4 +1,5 @@
 ﻿using System;
+using _2_UsuarioAPI.Models;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 
@@ -6,9 +7,9 @@ namespace _2_UsuarioAPI.Services
 {
     public class SignOutService
     {
-        private SignInManager<IdentityUser<int>> _signInManager;
+        private SignInManager<CustomIdentityUser> _signInManager;
 
-        public SignOutService(SignInManager<IdentityUser<int>> signInManager)
+        public SignOutService(SignInManager<CustomIdentityUser> signInManager)
         {
             _signInManager = signInManager;
         }

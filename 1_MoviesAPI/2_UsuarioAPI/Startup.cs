@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _2_UsuarioAPI.Data;
+using _2_UsuarioAPI.Models;
 using _2_UsuarioAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace _2_UserAPI
             services.AddDbContext<UserDBContext>(options =>
                 options.UseMySQL(Configuration.GetConnectionString("UserConnection"))
             );
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+            services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(
                     opt => opt.SignIn.RequireConfirmedEmail = true
                 )
                 .AddEntityFrameworkStores<UserDBContext>()

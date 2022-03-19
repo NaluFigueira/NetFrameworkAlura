@@ -9,10 +9,10 @@ namespace _2_UsuarioAPI.Services
 {
     public class SignInService
     {
-        private SignInManager<IdentityUser<int>> _signInManager;
+        private SignInManager<CustomIdentityUser> _signInManager;
         private TokenService _tokenService;
 
-        public SignInService(SignInManager<IdentityUser<int>> signInManager, TokenService tokenService)
+        public SignInService(SignInManager<CustomIdentityUser> signInManager, TokenService tokenService)
         {
             _signInManager = signInManager;
             _tokenService = tokenService;
@@ -45,7 +45,7 @@ namespace _2_UsuarioAPI.Services
 
         public Result PasswordReset(PasswordResetRequest request)
         {
-            IdentityUser<int> identityUser = GetIdentityUserByEmail(request.Email);
+            CustomIdentityUser identityUser = GetIdentityUserByEmail(request.Email);
 
             if (identityUser != null)
             {
@@ -66,7 +66,7 @@ namespace _2_UsuarioAPI.Services
 
         public Result GeneratePasswordResetCode(GeneratePasswordResetCodeRequest request)
         {
-            IdentityUser<int> identityUser = GetIdentityUserByEmail(request.Email);
+            CustomIdentityUser identityUser = GetIdentityUserByEmail(request.Email);
 
             if (identityUser != null)
             {
@@ -79,7 +79,7 @@ namespace _2_UsuarioAPI.Services
             return Result.Fail("Invalid user e-mail");
         }
 
-        private IdentityUser<int> GetIdentityUserByEmail(string email)
+        private CustomIdentityUser GetIdentityUserByEmail(string email)
         {
             return _signInManager
                             .UserManager
