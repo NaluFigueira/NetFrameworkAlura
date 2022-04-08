@@ -10,6 +10,7 @@
 - [Adding admin user and role](#adding-admin-user-and-role)
 - [Adding other roles](#adding-other-roles)
 - [Save role information in token](#save-role-information-in-token)
+- [Customizing identity user](#customizing-identity-user)
 
 ### Configuring Identity
 
@@ -495,3 +496,18 @@ public Result SignIn(SignInRequest signInRequest)
     //...other code
 }
 ```
+
+### Customizing identity user
+
+1. Create a model class extending from IdentityUser
+
+```csharp
+public class CustomIdentityUser : IdentityUser<int>
+{
+    //...other code
+}
+```
+
+2. Rename in the project `IdentityUser<int>` to `CustomIdentityUser`
+
+> **After renaming the user in the context class, remember to generate a new migration to add the customized attributes to the user table**
