@@ -9,6 +9,7 @@
 - [Managing mappers](#managing-mappers)
 - [Examples of endpoints](#examples-of-endpoints)
 - [Entity Relationships](#entity-relationships)
+- [Adding authorization to controller method](#adding-authorization-to-controller-methods)
 
 ### Removing default files and settings from VS project
 
@@ -504,3 +505,66 @@ protected override void OnModelCreating(ModelBuilder builder)
 ```
 
 Step 3 will create a migration that adds the sessions table to the database, a foreign key to the session associated cinema id and another to the movie id. sThus concluding the construction of the n:n relationship between those instances.
+
+### Adding authorization to controller method
+
+#### By role
+
+> To add authorization by user role to any controller method use `[Authorize(Roles = "admin, regular")]`
+
+1. Install in the api project the packages `Microsoft.AspNetCore.Authentication.JwtBearer` and `Microsoft.AspNetCore.Authorization`.
+
+2. Open `Startup.cs` in the api project, add to `ConfigureServices` the following line:
+
+```csharp
+services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+        .AddJwtBearer(token =>
+            {
+                token.RequireHttpsMetadata = false;
+                token.SaveToken = true;
+                token.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes("asdpajsdpoajdojcojopajcm")),
+                    //key must be the same for token generation
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                };
+            });
+```
+
+3. Still in `Startup.cs` on the api project, add to `Configure` the following line:
+
+```csharp
+app.UseAuthorization();
+```
+
+#### By policy
+
+> To add authorization by policy to any controller method use `[Authorize(Policy = "MinimumAge")]`
+
+1. Install in the api project the packages `Microsoft.AspNetCore.Authentication.JwtBearer` and `Microsoft.AspNetCore.Authorization`.
+
+2. Create a folder `Authorization`, there we'll add the policy requirements and handler (check `MinimumAgeHandler.cs` and `MinimumAgeRequirements.cs` for examples).
+
+> **It's important to add the required information in the generated token when user signs in**
+
+3. Open `Startup.cs` in the api project, add to `ConfigureServices` the following line:
+
+```csharp
+services.AddAuthorization(options =>
+    {
+        options.AddPolicy("MinimumAge", policy =>
+                {
+                    policy.Requirements.Add(new MinimumAgeRequirements(18));
+                });
+    });
+
+services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+```
