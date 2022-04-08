@@ -18,14 +18,12 @@ namespace _2_UsuarioAPI.Services
         private UserManager<CustomIdentityUser> _userManager;
         private IMapper _mapper;
         private EmailService _emailService;
-        private RoleManager<IdentityRole<int>> _roleManager;
 
-        public SignUpService(UserManager<CustomIdentityUser> userManager, IMapper mapper, EmailService emailService, RoleManager<IdentityRole<int>> roleManager)
+        public SignUpService(UserManager<CustomIdentityUser> userManager, IMapper mapper, EmailService emailService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _emailService = emailService;
-            _roleManager = roleManager;
         }
 
         public Result CreateUser(CreateUserDTO createUserDTO)
