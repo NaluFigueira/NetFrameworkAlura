@@ -1,3 +1,15 @@
+## Summary
+
+- [Removing default files and settings from VS project](#removing-default-files-and-settings-from-vs-project)
+- [Controller](#controller)
+- [Models](#models)
+- [Connecting with database using Entity Framework](#connecting-with-database-using-entity-framework)
+- [Managing database context](#managing-database-context)
+- [Using AutoMapper](#using-automapper)
+- [Managing mappers](#managing-mappers)
+- [Examples of endpoints](#examples-of-endpoints)
+- [Entity Relationships](#entity-relationships)
+
 ### Removing default files and settings from VS project
 
 After creating the solution on Visual Studio, remove the following files that will not be used:
