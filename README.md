@@ -21,14 +21,14 @@
 </p>
 
 <p align="center">
-  <a href="#bulb-main-features">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#bulb-main-features">Main Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
 ## :bulb: Main Features
 
-This project documents everything learned on Alura's ASP.NET Core REST APIs training. For now the main project approaches the following topics:
+This project documents everything learned on Alura's ASP.NET Core REST APIs training. For now, the main project approaches the following topics:
 
 - Essential procedures with HTTP methods
 - Entities relationships
