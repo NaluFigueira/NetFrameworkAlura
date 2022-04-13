@@ -5,184 +5,185 @@ namespace _ParkingLot
 {
     class MainClass
     {
-        // Cria uma lista de objetos do tipo veículos, para armazenar
-        // os veículos (automovéis e motos) que estão no estacionamento;
-        static Yard estacionamento = new Yard();
+        static ParkingLot parkingLot = new ParkingLot();
 
         static void Main(string[] args)
         {
-            string opcao;
+            string option;
             do
             {
-                Console.WriteLine(MostrarCabecalho());
-                Console.WriteLine(MostrarMenu());
-                opcao = LerOpcaoMenu();
-                ProcessarOpcaoMenu(opcao);
-                PressionaTecla();
-                Console.Clear();// limpa a tela;
-            } while (opcao != "5");
+                Console.WriteLine(ShowHeader());
+                Console.WriteLine(ShowMenu());
+                option = ReadMenuOption();
+                ProcessMenuOption(option);
+                PressKey();
+                Console.Clear();
+            } while (option != "5");
         }
 
-        static void MostrarVeiculosEstacionados()
+        static void ShowParkedVehicles()
         {
             Console.Clear();
-            Console.WriteLine(" Veículos Estacionados");
-            foreach (Vehicle v in estacionamento.Veiculos)
+            Console.WriteLine(" Parked vehicles");
+
+            foreach (Vehicle v in parkingLot.Vehicles)
             {
                 // placa, proprietario, hora
-                Console.WriteLine("Placa :{0}", v.Placa);
-                Console.WriteLine("Proprietário :{0}", v.Proprietario);
-                Console.WriteLine("Hora de entrada :{0:HH:mm:ss}", v.HoraEntrada);
+                Console.WriteLine("License plate :{0}", v.LicensePlate);
+                Console.WriteLine("Owner :{0}", v.Owner);
+                Console.WriteLine("Entrance time :{0:HH:mm:ss}", v.EntranceTime);
                 Console.WriteLine("********************************************");
             }
-            if (estacionamento.Veiculos.Count == 0)
+
+            if (parkingLot.Vehicles.Count == 0)
             {
-                Console.WriteLine("Não há veículos estacionados no momento...");
+                Console.WriteLine("There are no parked vehicles at this time...");
             }
-            PressionaTecla();
+
+            PressKey();
         }
 
-        static void RegistrarSaidaVeiculo()
+        static void RegisterVehicleExit()
         {
             Console.Clear();
-            Console.WriteLine("Registro de Saída de Veículos");
-            Console.Write("Placa: ");
-            string placa = Console.ReadLine();
-            Console.WriteLine(estacionamento.RegistrarSaidaVeiculo(placa));
-            PressionaTecla();
+            Console.WriteLine("Register vehicle exit");
+            Console.Write("License plate: ");
+            string licensePlate = Console.ReadLine();
+            Console.WriteLine(parkingLot.RegisterVehicleExit(licensePlate));
+            PressKey();
         }
 
-        static void RegistrarEntradaVeiculo()
+        static void RegisterVehicleEntrance()
         {
             Console.Clear();
-            Console.WriteLine("Registro de Entrada de Veículos");
-            Console.Write("Tipo de veículo (1-Carro; 2-Moto) :");
-            string tipo = Console.ReadLine();
-            switch (tipo)
+            Console.WriteLine("Register vehicles entrance");
+            Console.Write("Vehicle type (1-car; 2-motorcycle) :");
+            string type = Console.ReadLine();
+            switch (type)
             {
                 case "1":
-                    RegistrarEntradaAutomovel();
+                    RegisterCarEntrance();
                     break;
                 case "2":
-                    RegistrarEntradaMotocicleta();
+                    RegisterMotorcycleEntrance();
                     break;
                 default:
-                    Console.WriteLine("Tipo Inválido");
-                    PressionaTecla();
+                    Console.WriteLine("Invalid type");
+                    PressKey();
                     break;
             }
         }
 
-        static void RegistrarEntradaMotocicleta()
+        static void RegisterMotorcycleEntrance()
         {
-            Console.WriteLine("Dados da Motocicleta");
-            Vehicle moto = new Vehicle();
-            moto.Tipo = VehicleType.Motocicleta;
-            //preeencher placa,cor,hora,entrada e proprietário
-            Console.Write("Digite os dados da placa (XXX-9999): ");
+            Console.WriteLine("Motorcycle data");
+            Vehicle motorcycle = new Vehicle();
+            motorcycle.Type = VehicleType.Motorcycle;
+
+            Console.Write("Type license plate (XXX-9999): ");
             try
             {
-                moto.Placa = Console.ReadLine();
+                motorcycle.LicensePlate = Console.ReadLine();
             }
             catch (FormatException fe)
             {
-                Console.WriteLine("ocorreu um problema: {0}", fe.Message);
-                Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+                Console.WriteLine("a problem occured: {0}", fe.Message);
+                Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
                 return;
             }
-            Console.Write("Digite a cor da moto: ");
-            moto.Cor = Console.ReadLine();
-            Console.Write("Digite o nome do proprietário: ");
-            moto.Proprietario = Console.ReadLine();
-            moto.HoraEntrada = DateTime.Now;
-            moto.Acelerar(5);
-            moto.Frear(5);
-            estacionamento.RegistrarEntradaVeiculo(moto);
-            Console.WriteLine("Motocicleta registrada com sucesso!");
+            Console.Write("Type motorcycle color: ");
+            motorcycle.Color = Console.ReadLine();
+            Console.Write("Type owner name: ");
+            motorcycle.Owner = Console.ReadLine();
+            motorcycle.EntranceTime = DateTime.Now;
+            motorcycle.Accelerate(5);
+            motorcycle.Break(5);
+            parkingLot.RegisterVehicleEntrance(motorcycle);
+            Console.WriteLine("Motorcycle successfully registered!");
             Console.ReadKey();
         }
 
-        static void RegistrarEntradaAutomovel()
+        static void RegisterCarEntrance()
         {
-            Console.WriteLine("Dados do Automovél");
+            Console.WriteLine("Car data");
             Vehicle carro = new Vehicle();
-            carro.Tipo = VehicleType.Automovel;
-            //preeencher placa,cor,hora,entrada e proprietário.
-            Console.Write("Digite os dados da placa (XXX-9999): ");
+            carro.Type = VehicleType.Car;
+
+            Console.Write("Type license plate (XXX-9999): ");
             try
             {
-                carro.Placa = Console.ReadLine();
+                carro.LicensePlate = Console.ReadLine();
             }
             catch (FormatException fe)
             {
-                Console.WriteLine("ocorreu um problema: {0}", fe.Message);
-                PressionaTecla();
+                Console.WriteLine("a problem occured: {0}", fe.Message);
+                PressKey();
                 return;
             }
-            Console.Write("Digite a cor do carro: ");
-            carro.Cor = Console.ReadLine();
-            Console.Write("Digite o nome do proprietário: ");
-            carro.Proprietario = Console.ReadLine();
-            carro.HoraEntrada = DateTime.Now;
-            carro.Acelerar(5);
-            carro.Frear(5);
-            estacionamento.RegistrarEntradaVeiculo(carro);
-            Console.WriteLine("Automóvel registrado com sucesso!");
+            Console.Write("Type car color: ");
+            carro.Color = Console.ReadLine();
+            Console.Write("Type owner name: ");
+            carro.Owner = Console.ReadLine();
+            carro.EntranceTime = DateTime.Now;
+            carro.Accelerate(5);
+            carro.Break(5);
+            parkingLot.RegisterVehicleEntrance(carro);
+            Console.WriteLine("Car successfully registered!");
         }
 
-        static string MostrarCabecalho()
+        static string ShowHeader()
         {
-            return "Controle de Estacionamento Rotativo";
+            return "Parking lot control system";
         }
 
-        static string LerOpcaoMenu()
+        static string ReadMenuOption()
         {
-            string opcao;
-            Console.Write("Opção desejada: ");
-            opcao = Console.ReadLine();
-            return opcao;
+            string option;
+            Console.Write("Desired option: ");
+            option = Console.ReadLine();
+            return option;
         }
 
-        static string MostrarMenu()
+        static string ShowMenu()
         {
-            string menu = "Escolha uma opção:\n" +
-                            "1 - Registrar Entrada\n" +
-                            "2 - Registrar Saída\n" +
-                            "3 - Exibir Faturamento\n" +
-                            "4 - Mostrar Veículos Estacionados\n" +
-                            "5 - Sair do Programa \n";
+            string menu = "Select an option:\n" +
+                            "1 - Register entrance\n" +
+                            "2 - Register exit\n" +
+                            "3 - Show billed value\n" +
+                            "4 - Show parked vehicles\n" +
+                            "5 - Exit system \n";
             return menu;
         }
 
-        private static void PressionaTecla()
+        private static void PressKey()
         {
-            Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+            Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
         }
 
-        static void ProcessarOpcaoMenu(string opcao)
+        static void ProcessMenuOption(string opcao)
         {
             switch (opcao)
             {
                 case "1":
-                    RegistrarEntradaVeiculo();
+                    RegisterVehicleEntrance();
                     break;
                 case "2":
-                    RegistrarSaidaVeiculo();
+                    RegisterVehicleExit();
                     break;
                 case "3":
                     Console.Clear();
-                    Console.WriteLine(estacionamento.MostrarFaturamento());
+                    Console.WriteLine(parkingLot.ShowBilling());
                     break;
                 case "4":
-                    MostrarVeiculosEstacionados();
+                    ShowParkedVehicles();
                     break;
                 case "5":
-                    Console.WriteLine("Obrigado por utilizar o programa.");
+                    Console.WriteLine("Thank you for using this system");
                     break;
                 default:
-                    Console.WriteLine("Opção de menu inválida!");
+                    Console.WriteLine("Invalid menu option!");
                     break;
             }
         }

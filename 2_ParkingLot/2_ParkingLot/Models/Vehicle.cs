@@ -3,70 +3,68 @@ namespace _ParkingLot.Models
 {
     public class Vehicle
     {
-        private string _placa;
-        private string _proprietario;
-        private VehicleType _tipo;
+        private string _licensePlate;
+        private string _owner;
+        private VehicleType _type;
 
-        public string Placa
+        public string LicensePlate
         {
             get
             {
-                return _placa;
+                return _licensePlate;
             }
             set
             {
                 if (value.Length != 8)
                 {
-                    throw new FormatException(" A placa deve possuir 8 caracteres");
+                    throw new FormatException(" License plate should have 8 digits");
                 }
 
                 for (int i = 0; i < 3; i++)
                 {
-                    //checa se os 3 primeiros caracteres são numeros
                     if (char.IsDigit(value[i]))
                     {
-                        throw new FormatException("Os 3 primeiros caracteres devem ser letras!");
+                        throw new FormatException("The 3 first digits should be letters!");
                     }
                 }
 
                 if (value[3] != '-')
                 {
-                    throw new FormatException("O 4° caractere deve ser um hífen");
+                    throw new FormatException("The 4th digit should be a hyphen");
                 }
 
                 for (int i = 4; i < 8; i++)
                 {
                     if (!char.IsDigit(value[i]))
                     {
-                        throw new FormatException("Do 5º ao 8º caractere deve-se ter um número!");
+                        throw new FormatException("Between 5th and 8th digits should be a number!");
                     }
                 }
-                _placa = value;
+                _licensePlate = value;
 
             }
         }
 
-        public string Cor { get; set; }
-        public double Largura { get; set; }
-        public double VelocidadeAtual { get; set; }
-        public string Modelo { get; set; }
-        public string Proprietario
+        public string Color { get; set; }
+        public double Width { get; set; }
+        public double Speed { get; set; }
+        public string Model { get; set; }
+        public string Owner
         {
             get; set;
         }
-        public DateTime HoraEntrada { get; set; }
-        public DateTime HoraSaida { get; set; }
-        public VehicleType Tipo { get => _tipo; set => _tipo = value; }
+        public DateTime EntranceTime { get; set; }
+        public DateTime ExitTime { get; set; }
+        public VehicleType Type { get => _type; set => _type = value; }
 
-        //Métodos
-        public void Acelerar(int tempoSeg)
+        public void Accelerate(int timeInSeconds)
         {
-            this.VelocidadeAtual += (tempoSeg * 10);
+            this.Speed += (timeInSeconds * 10);
         }
 
-        public void Frear(int tempoSeg)
+        public void Break(int timeInSeconds)
         {
-            this.VelocidadeAtual -= (tempoSeg * 15);
+            this.Speed -= (timeInSeconds * 15);
         }
 
         public Vehicle()
@@ -74,9 +72,9 @@ namespace _ParkingLot.Models
 
         }
 
-        public Vehicle(string proprietario)
+        public Vehicle(string owner)
         {
-            Proprietario = proprietario;
+            Owner = owner;
         }
 
     }
