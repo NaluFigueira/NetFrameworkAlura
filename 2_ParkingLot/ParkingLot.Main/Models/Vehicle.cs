@@ -55,7 +55,18 @@ namespace ParkingLot.Main.Models
         }
         public DateTime EntranceTime { get; set; }
         public DateTime ExitTime { get; set; }
-        public VehicleType Type { get => _type; set => _type = value; }
+        public VehicleType Type
+        {
+            get { return _type; }
+            set
+            {
+                if (value == null)
+                {
+                    _type = VehicleType.Car;
+                }
+                else { _type = value; }
+            }
+        }
 
         public void Accelerate(int timeInSeconds)
         {
