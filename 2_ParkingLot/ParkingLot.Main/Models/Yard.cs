@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _ParkingLot.Models
+namespace ParkingLot.Main.Models
 {
-    public class ParkingLot
+    public class Yard
     {
-        public ParkingLot()
+        public Yard()
         {
             billed = 0;
             vehicles = new List<Vehicle>();

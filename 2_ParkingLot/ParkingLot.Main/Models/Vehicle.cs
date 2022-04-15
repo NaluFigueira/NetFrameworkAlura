@@ -1,5 +1,5 @@
 ﻿using System;
-namespace _ParkingLot.Models
+namespace ParkingLot.Main.Models
 {
     public class Vehicle
     {

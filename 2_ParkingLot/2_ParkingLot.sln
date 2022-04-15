@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.21
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_ParkingLot", "2_ParkingLot\2_ParkingLot.csproj", "{0D469E07-DC97-41B8-B6FC-483CE5402DA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Tests", "ParkingLot.Tests\ParkingLot.Tests.csproj", "{230EA8F8-0402-4035-8668-9D1B1858D7AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingLot.Main", "ParkingLot.Main\ParkingLot.Main.csproj", "{0725D73D-2F6B-44E8-B2CF-5D7D5EAB39D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|anycpu = Release|anycpu
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0D469E07-DC97-41B8-B6FC-483CE5402DA9}.Debug|anycpu.ActiveCfg = Debug|anycpu
-		{0D469E07-DC97-41B8-B6FC-483CE5402DA9}.Debug|anycpu.Build.0 = Debug|anycpu
-		{0D469E07-DC97-41B8-B6FC-483CE5402DA9}.Release|anycpu.ActiveCfg = Release|anycpu
-		{0D469E07-DC97-41B8-B6FC-483CE5402DA9}.Release|anycpu.Build.0 = Release|anycpu
+		{230EA8F8-0402-4035-8668-9D1B1858D7AB}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{230EA8F8-0402-4035-8668-9D1B1858D7AB}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{230EA8F8-0402-4035-8668-9D1B1858D7AB}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{230EA8F8-0402-4035-8668-9D1B1858D7AB}.Release|anycpu.Build.0 = Release|Any CPU
+		{0725D73D-2F6B-44E8-B2CF-5D7D5EAB39D2}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{0725D73D-2F6B-44E8-B2CF-5D7D5EAB39D2}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{0725D73D-2F6B-44E8-B2CF-5D7D5EAB39D2}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{0725D73D-2F6B-44E8-B2CF-5D7D5EAB39D2}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

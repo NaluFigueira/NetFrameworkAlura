@@ -1,11 +1,11 @@
 ﻿using System;
-using _ParkingLot.Models;
+using ParkingLot.Main.Models;
 
-namespace _ParkingLot
+namespace ParkingLot.Main
 {
     class MainClass
     {
-        static ParkingLot parkingLot = new ParkingLot();
+        static Yard yard = new Yard();
 
         static void Main(string[] args)
         {
@@ -26,16 +26,15 @@ namespace _ParkingLot
             Console.Clear();
             Console.WriteLine(" Parked vehicles");
 
-            foreach (Vehicle v in parkingLot.Vehicles)
+            foreach (Vehicle v in yard.Vehicles)
             {
-                // placa, proprietario, hora
                 Console.WriteLine("License plate :{0}", v.LicensePlate);
                 Console.WriteLine("Owner :{0}", v.Owner);
                 Console.WriteLine("Entrance time :{0:HH:mm:ss}", v.EntranceTime);
                 Console.WriteLine("********************************************");
             }
 
-            if (parkingLot.Vehicles.Count == 0)
+            if (yard.Vehicles.Count == 0)
             {
                 Console.WriteLine("There are no parked vehicles at this time...");
             }
@@ -49,7 +48,7 @@ namespace _ParkingLot
             Console.WriteLine("Register vehicle exit");
             Console.Write("License plate: ");
             string licensePlate = Console.ReadLine();
-            Console.WriteLine(parkingLot.RegisterVehicleExit(licensePlate));
+            Console.WriteLine(yard.RegisterVehicleExit(licensePlate));
             PressKey();
         }
 
@@ -99,7 +98,7 @@ namespace _ParkingLot
             motorcycle.EntranceTime = DateTime.Now;
             motorcycle.Accelerate(5);
             motorcycle.Break(5);
-            parkingLot.RegisterVehicleEntrance(motorcycle);
+            yard.RegisterVehicleEntrance(motorcycle);
             Console.WriteLine("Motorcycle successfully registered!");
             Console.ReadKey();
         }
@@ -107,13 +106,13 @@ namespace _ParkingLot
         static void RegisterCarEntrance()
         {
             Console.WriteLine("Car data");
-            Vehicle carro = new Vehicle();
-            carro.Type = VehicleType.Car;
+            Vehicle car = new Vehicle();
+            car.Type = VehicleType.Car;
 
             Console.Write("Type license plate (XXX-9999): ");
             try
             {
-                carro.LicensePlate = Console.ReadLine();
+                car.LicensePlate = Console.ReadLine();
             }
             catch (FormatException fe)
             {
@@ -122,13 +121,13 @@ namespace _ParkingLot
                 return;
             }
             Console.Write("Type car color: ");
-            carro.Color = Console.ReadLine();
+            car.Color = Console.ReadLine();
             Console.Write("Type owner name: ");
-            carro.Owner = Console.ReadLine();
-            carro.EntranceTime = DateTime.Now;
-            carro.Accelerate(5);
-            carro.Break(5);
-            parkingLot.RegisterVehicleEntrance(carro);
+            car.Owner = Console.ReadLine();
+            car.EntranceTime = DateTime.Now;
+            car.Accelerate(5);
+            car.Break(5);
+            yard.RegisterVehicleEntrance(car);
             Console.WriteLine("Car successfully registered!");
         }
 
@@ -162,9 +161,9 @@ namespace _ParkingLot
             Console.ReadKey();
         }
 
-        static void ProcessMenuOption(string opcao)
+        static void ProcessMenuOption(string option)
         {
-            switch (opcao)
+            switch (option)
             {
                 case "1":
                     RegisterVehicleEntrance();
@@ -174,7 +173,7 @@ namespace _ParkingLot
                     break;
                 case "3":
                     Console.Clear();
-                    Console.WriteLine(parkingLot.ShowBilling());
+                    Console.WriteLine(yard.ShowBilling());
                     break;
                 case "4":
                     ShowParkedVehicles();
