@@ -6,7 +6,8 @@ namespace ParkingLot.Tests
 {
     public class VehicleTests
     {
-        [Fact]
+        [Fact(DisplayName = "Accelerate vehicle")]
+        [Trait("Feature", "Accelerate")]
         public void AccelerateVehicleTest()
         {
             //Arrange
@@ -19,7 +20,8 @@ namespace ParkingLot.Tests
             Assert.Equal(100, vehicle.Speed);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Break vehicle")]
+        [Trait("Feature", "Break")]
         public void BreakVihicleTest()
         {
             //Arrange
@@ -32,7 +34,7 @@ namespace ParkingLot.Tests
             Assert.Equal(-150, vehicle.Speed);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Vehicle type should be car by default")]
         public void TypeVihicleTest()
         {
             //Arrange
@@ -42,6 +44,12 @@ namespace ParkingLot.Tests
 
             //Assert
             Assert.Equal(VehicleType.Car, vehicle.Type);
+        }
+
+        [Fact(Skip = "Method not yet implemented")]
+        public void VehicleOwnerNameTest()
+        {
+
         }
     }
 }
