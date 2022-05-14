@@ -6,12 +6,19 @@ namespace ParkingLot.Tests
 {
     public class VehicleTests
     {
-        [Fact(DisplayName = "Accelerate vehicle")]
-        [Trait("Feature", "Accelerate")]
+        private Vehicle vehicle;
+
+        public VehicleTests()
+        {
+            vehicle = new Vehicle();
+
+        }
+
+        [Fact(DisplayName = "Should change vehicle speed to 100 if accelerated by 10")]
+        [Trait("Vehicle", "Features")]
         public void AccelerateVehicleTest()
         {
             //Arrange
-            Vehicle vehicle = new Vehicle();
 
             //Act
             vehicle.Accelerate(10);
@@ -20,12 +27,11 @@ namespace ParkingLot.Tests
             Assert.Equal(100, vehicle.Speed);
         }
 
-        [Fact(DisplayName = "Break vehicle")]
-        [Trait("Feature", "Break")]
+        [Fact(DisplayName = "Should change vehicle speed to -150 if broke by 10")]
+        [Trait("Vehicle", "Features")]
         public void BreakVihicleTest()
         {
             //Arrange
-            Vehicle vehicle = new Vehicle();
 
             //Act
             vehicle.Break(10);
@@ -35,10 +41,10 @@ namespace ParkingLot.Tests
         }
 
         [Fact(DisplayName = "Vehicle type should be car by default")]
-        public void TypeVihicleTest()
+        [Trait("Vehicle", "Data")]
+        public void DefaultVehicleTypeTest()
         {
             //Arrange
-            Vehicle vehicle = new Vehicle();
 
             //Act
 
@@ -46,13 +52,8 @@ namespace ParkingLot.Tests
             Assert.Equal(VehicleType.Car, vehicle.Type);
         }
 
-        [Fact(Skip = "Method not yet implemented")]
-        public void VehicleOwnerNameTest()
-        {
-
-        }
-
-        [Theory]
+        [Theory(DisplayName = "Vehicle record should be displayed correctly")]
+        [Trait("Vehicle", "Features")]
         [InlineData("xxx-9999", "black", "Ana Figueira", "Civic", VehicleType.Car)]
         [InlineData("xxx-9999", "red", "Breno Maia", "Repsol Honda", VehicleType.Motorcycle)]
         public void GetVehicleRecordTest(string licensePlate,
@@ -62,7 +63,6 @@ namespace ParkingLot.Tests
                                          VehicleType type)
         {
             //Arrange
-            var vehicle = new Vehicle();
             vehicle.LicensePlate = licensePlate;
             vehicle.Color = color;
             vehicle.Model = model;

@@ -3,10 +3,21 @@ using ParkingLot.Main.Models;
 using Xunit;
 
 namespace ParkingLot.Tests
-{
+{ 
     public class YardTests
     {
-        [Theory]
+        private Yard yard;
+        private Vehicle vehicle;
+
+        public YardTests()
+        {
+            yard = new Yard();
+            vehicle = new Vehicle();
+        }
+
+
+        [Theory(DisplayName = "Parking lot billing should have correct values")]
+        [Trait("Yard", "Features")]
         [InlineData("Ana Figueira", "abc-1234", "black", "Impala")]
         [InlineData("Cassio Maia", "def-5678", "silver", "Civic")]
         [InlineData("Breno da Cruz", "ghi-9101", "blue", "Jaguar")]
@@ -16,8 +27,6 @@ namespace ParkingLot.Tests
                                                 string model)
         {
             //Arrange
-            var yard = new Yard();
-            var vehicle = new Vehicle();
             vehicle.Owner = owner;
             vehicle.LicensePlate = licensePlate;
             vehicle.Color = color;
@@ -33,12 +42,11 @@ namespace ParkingLot.Tests
             Assert.Equal(2, billing);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Should find in parking lot vehicle with license plate xxx-9999")]
+        [Trait("Yard", "Features")]
         public void FindVehicleByPlateTest()
         {
             //Arrange
-            var yard = new Yard();
-            var vehicle = new Vehicle();
             vehicle.LicensePlate = "xxx-9999";
 
             yard.RegisterVehicleEntrance(vehicle);
@@ -50,12 +58,11 @@ namespace ParkingLot.Tests
             Assert.Equal(vehicle.LicensePlate, foundVehicle.LicensePlate);
         }
 
-        [Fact]
-        public void UpdateVehicleDataTest()
+        [Fact(DisplayName = "Should update vehicle xxx-9999 color from black to green")]
+        [Trait("Yard", "Features")]
+        public void UpdateVehicleColorTest()
         {
             //Arrange
-            var yard = new Yard();
-            var vehicle = new Vehicle();
             vehicle.LicensePlate = "xxx-9999";
             vehicle.Color = "black";
 

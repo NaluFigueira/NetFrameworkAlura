@@ -3,6 +3,7 @@
 - [Creating a test project](#creating-a-test-project)
 - [AAA test standard](#aaa-test-standard)
 - [Test attributes](#test-attributes)
+- [Setup and cleanup](#setup-and-cleanup)
 
 ### Creating a test project
 
@@ -26,7 +27,14 @@ dotnet add ./YourProject.Tests/YourProject.Tests.csproj reference ./YourMainProj
 To run the tests, you can either use Visual Studio own test manager or run the following command on the projects folder:
 
 ```bash
+#Builds and runs tests
 dotnet test
+
+#Builds, runs tests, and shows all tests that were executed
+dotnet test -l "console;verbosity=normal"
+
+#Builds, runs tests, filters by trait and shows all tests that were executed
+dotnet test -l "console;verbosity=normal" --filter "TraitName=TraitValue"
 ```
 
 ### AAA test standard
@@ -162,5 +170,36 @@ public class CalculatorTestData : IEnumerable<object[]>
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
+```
+
+### Setup and cleanup
+
+#### Setup
+
+Include in your test class constructor what you'll need to setup before every test.
+
+In this example, in all of Vehicle class tests, we'll need a Vehicle instance. Therefore, we'll include a private attribute `vehicle` to the test class, and in it's constructor, it's initialization. That way, every test method will have an already defined clean instance once it's started.
+
+```csharp
+private Vehicle vehicle;
+
+public VehicleTests()
+{
+    Vehicle = new Vehicle();
+}
+```
+
+#### Cleanup
+
+To cleanup any setups, we can extend our test class to use `IDisposable`, and then implement its interface `Dispose` with what we want to clean. The `Dispose` method will be called after every test method.
+
+```csharp
+public class VehicleTests : IDisposable
+{
+    public void Dispose()
+    {
+        //clean setup information
+    }
 }
 ```
