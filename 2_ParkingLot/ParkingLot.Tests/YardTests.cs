@@ -32,5 +32,44 @@ namespace ParkingLot.Tests
             //Assert
             Assert.Equal(2, billing);
         }
+
+        [Fact]
+        public void FindVehicleByPlateTest()
+        {
+            //Arrange
+            var yard = new Yard();
+            var vehicle = new Vehicle();
+            vehicle.LicensePlate = "xxx-9999";
+
+            yard.RegisterVehicleEntrance(vehicle);
+
+            //Act
+            var foundVehicle = yard.FindVehicleByPlate(vehicle.LicensePlate);
+
+            //Assert
+            Assert.Equal(vehicle.LicensePlate, foundVehicle.LicensePlate);
+        }
+
+        [Fact]
+        public void UpdateVehicleDataTest()
+        {
+            //Arrange
+            var yard = new Yard();
+            var vehicle = new Vehicle();
+            vehicle.LicensePlate = "xxx-9999";
+            vehicle.Color = "black";
+
+            var updatedVehicle = new Vehicle();
+            updatedVehicle.LicensePlate = "xxx-9999";
+            updatedVehicle.Color = "green";
+
+            yard.RegisterVehicleEntrance(vehicle);
+
+            //Act
+            var result = yard.UpdateVehicleData(vehicle.LicensePlate, updatedVehicle);
+
+            //Assert
+            Assert.Equal(result.Color, updatedVehicle.Color);
+        }
     }
 }

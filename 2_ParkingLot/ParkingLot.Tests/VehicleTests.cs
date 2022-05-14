@@ -51,5 +51,36 @@ namespace ParkingLot.Tests
         {
 
         }
+
+        [Theory]
+        [InlineData("xxx-9999", "black", "Ana Figueira", "Civic", VehicleType.Car)]
+        [InlineData("xxx-9999", "red", "Breno Maia", "Repsol Honda", VehicleType.Motorcycle)]
+        public void GetVehicleRecordTest(string licensePlate,
+                                         string color,
+                                         string owner,
+                                         string model,
+                                         VehicleType type)
+        {
+            //Arrange
+            var vehicle = new Vehicle();
+            vehicle.LicensePlate = licensePlate;
+            vehicle.Color = color;
+            vehicle.Model = model;
+            vehicle.Type = type;
+            vehicle.Owner = owner;
+            var expectedRecord = $"Vehicle's record:\n " +
+                                 $"Type: {type.ToString()}\n" +
+                                 $"Owner: {owner}\n" +
+                                 $"Model: {model}\n" +
+                                 $"Color: {color}\n" +
+                                 $"License Plate: {licensePlate}\n";
+
+            //Act
+            var vehicleRecord = vehicle.ToString();
+
+            //Assert
+            Assert.Contains(expectedRecord, vehicleRecord);
+
+        }
     }
 }

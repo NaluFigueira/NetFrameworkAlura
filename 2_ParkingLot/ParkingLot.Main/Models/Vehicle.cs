@@ -88,5 +88,25 @@ namespace ParkingLot.Main.Models
             Owner = owner;
         }
 
+        public void UpdateData(Vehicle updatedVehicle)
+        {
+            this.Color = updatedVehicle.Color;
+            this.Model = updatedVehicle.Model;
+            this.Owner = updatedVehicle.Owner;
+            this.Speed = updatedVehicle.Speed;
+            this.Width = updatedVehicle.Width;
+            this.Type = updatedVehicle.Type;
+        }
+
+        public override string ToString()
+        {
+            return $"Vehicle's record:\n " +
+                   $"Type: {this.Type.ToString()}\n" +
+                   $"Owner: {this.Owner}\n" +
+                   $"Model: {this.Model}\n" +
+                   $"Color: {this.Color}\n" +
+                   $"License Plate: {this.LicensePlate}\n";
+        }
+
     }
 }

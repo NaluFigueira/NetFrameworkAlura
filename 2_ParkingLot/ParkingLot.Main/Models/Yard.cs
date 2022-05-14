@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ParkingLot.Main.Models
 {
@@ -84,5 +85,20 @@ namespace ParkingLot.Main.Models
             return info;
         }
 
+        public Vehicle UpdateVehicleData(string licensePlate, Vehicle updatedVehicle)
+        {
+            var vehicleToUpdate = FindVehicleByPlate(licensePlate);
+
+            vehicleToUpdate.UpdateData(updatedVehicle);
+
+            return vehicleToUpdate;
+        }
+
+        public Vehicle FindVehicleByPlate(string licensePlate)
+        {
+            var foundVehicle = this.vehicles
+                .FirstOrDefault((vehicle) => vehicle.LicensePlate == licensePlate);
+            return foundVehicle;
+        }
     }
 }
