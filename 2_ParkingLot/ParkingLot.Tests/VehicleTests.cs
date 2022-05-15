@@ -82,5 +82,26 @@ namespace ParkingLot.Tests
             Assert.Contains(expectedRecord, vehicleRecord);
 
         }
+
+
+        
+        [Theory(DisplayName = "Should display correct error message when license plate format is incorrect")]
+        [Trait("Vehicle", "Data")]
+        [InlineData("xxx-999", "License plate should have 8 digits")]
+        [InlineData("1xx-9999", "The 3 first digits should be letters!")]
+        [InlineData("xxx.9999", "The 4th digit should be a hyphen")]
+        [InlineData("xxx-a999", "Between 5th and 8th digits should be a number!")]
+        public void LicensePlateWithNoHiphenTest(string plate, string expectedErrorMessage)
+        {
+            //Arrange
+
+            //Act
+            var error = Assert.Throws<System.FormatException>(
+                () => new Vehicle().LicensePlate = plate
+            );
+
+            //Assert
+            Assert.Equal(error.Message, expectedErrorMessage);
+        }
     }
 }

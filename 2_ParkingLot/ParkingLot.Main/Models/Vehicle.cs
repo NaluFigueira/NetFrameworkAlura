@@ -17,7 +17,7 @@ namespace ParkingLot.Main.Models
             {
                 if (value.Length != 8)
                 {
-                    throw new FormatException(" License plate should have 8 digits");
+                    throw new FormatException("License plate should have 8 digits");
                 }
 
                 for (int i = 0; i < 3; i++)
