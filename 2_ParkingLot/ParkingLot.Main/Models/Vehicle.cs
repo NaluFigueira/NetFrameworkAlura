@@ -67,6 +67,8 @@ namespace ParkingLot.Main.Models
                 else { _type = value; }
             }
         }
+        public string TicketId { get; set; }
+        public string Ticket { get; set; }
 
         public void Accelerate(int timeInSeconds)
         {

@@ -32,6 +32,7 @@ namespace ParkingLot.Main.Models
         public void RegisterVehicleEntrance(Vehicle vehicle)
         {
             vehicle.EntranceTime = DateTime.Now;
+            GenerateVehicleTicket(vehicle);
             this.Vehicles.Add(vehicle);
         }
 
@@ -42,7 +43,7 @@ namespace ParkingLot.Main.Models
 
             foreach (Vehicle v in this.Vehicles)
             {
-                if (v.LicensePlate == licensePlate)
+                if (v.TicketId == licensePlate)
                 {
                     v.ExitTime = DateTime.Now;
 
@@ -85,20 +86,29 @@ namespace ParkingLot.Main.Models
             return info;
         }
 
-        public Vehicle UpdateVehicleData(string licensePlate, Vehicle updatedVehicle)
+        public Vehicle UpdateVehicleData(string ticketId, Vehicle updatedVehicle)
         {
-            var vehicleToUpdate = FindVehicleByPlate(licensePlate);
+            var vehicleToUpdate = FindVehicleByTicketId(ticketId);
 
             vehicleToUpdate.UpdateData(updatedVehicle);
 
             return vehicleToUpdate;
         }
 
-        public Vehicle FindVehicleByPlate(string licensePlate)
+        public Vehicle FindVehicleByTicketId(string ticketId)
         {
             var foundVehicle = this.vehicles
-                .FirstOrDefault((vehicle) => vehicle.LicensePlate == licensePlate);
+                .FirstOrDefault((vehicle) => vehicle.TicketId == ticketId);
             return foundVehicle;
+        }
+
+        public void GenerateVehicleTicket(Vehicle vehicle)
+        {
+            vehicle.TicketId = new Guid().ToString();
+            vehicle.Ticket = $"### Parking lot ticket ###\n" +
+                             $">>> Identifier: {vehicle.TicketId}\n" +
+                             $">>> Entrance date/time: {DateTime.Now}\n" +
+                             $">>> Vehicle license plate: {vehicle.LicensePlate}";
         }
     }
 }

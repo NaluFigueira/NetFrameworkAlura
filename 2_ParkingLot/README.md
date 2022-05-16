@@ -4,6 +4,7 @@
 - [AAA test standard](#aaa-test-standard)
 - [Test attributes](#test-attributes)
 - [Setup and cleanup](#setup-and-cleanup)
+- [Testing exceptions](#testing-exceptions)
 
 ### Creating a test project
 
@@ -202,4 +203,21 @@ public class VehicleTests : IDisposable
         //clean setup information
     }
 }
+```
+
+### Testing exceptions
+
+To test a thrown exception, you can consider the following example
+
+```csharp
+//Arrange
+
+//Act
+Action createVehicleWithSpecificPlate =
+    () => new Vehicle().LicensePlate = plate;
+
+var exception = Assert.Throws<System.FormatException>(createVehicleWithSpecificPlate);
+
+//Assert
+Assert.Equal(exception.Message, expectedErrorMessage);
 ```

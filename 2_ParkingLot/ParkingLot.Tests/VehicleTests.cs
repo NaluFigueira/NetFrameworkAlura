@@ -96,12 +96,13 @@ namespace ParkingLot.Tests
             //Arrange
 
             //Act
-            var error = Assert.Throws<System.FormatException>(
-                () => new Vehicle().LicensePlate = plate
-            );
+            Action createVehicleWithSpecificPlate =
+                () => new Vehicle().LicensePlate = plate;
+            var exception = Assert.Throws<System.FormatException>(createVehicleWithSpecificPlate);
 
             //Assert
-            Assert.Equal(error.Message, expectedErrorMessage);
+            Assert.Equal(exception.Message, expectedErrorMessage);
         }
+
     }
 }
