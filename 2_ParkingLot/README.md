@@ -221,3 +221,9 @@ var exception = Assert.Throws<System.FormatException>(createVehicleWithSpecificP
 //Assert
 Assert.Equal(exception.Message, expectedErrorMessage);
 ```
+
+### Notes
+
+> :bulb: We can test a private method by calling it from a public method. Thus not contradicting visibility and encapsulation principles.
+
+> :bulb: We should analyze what is more valuable user-wise to test for each feature, avoiding unnecessary tests cases.
