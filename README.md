@@ -98,6 +98,7 @@ Fill your the example file `secrets.json` with your database and gmail credentia
 After that run the following command in the projects folder to set user secrets:
 
 ```bash
+$ dotnet user-secrets init
 # Windows
 $ type .\secrets.json | dotnet user-secrets set
 
