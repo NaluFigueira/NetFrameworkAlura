@@ -1,6 +1,8 @@
-﻿using Alura.ByteBank.Dominio.Entidades;
+﻿using System;
+using Alura.ByteBank.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Alura.ByteBank.Dados.Contexto
 {
@@ -9,11 +11,15 @@ namespace Alura.ByteBank.Dados.Contexto
         public DbSet<ContaCorrente> ContaCorrentes { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Agencia> Agencias { get; set; }
-        public IConfiguration Configuration { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string stringconexao = "server=localhost;DataBase=bytebankDb;Uid=root;Pwd=Root.123";
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<ByteBankContexto>()
+                .Build();
+            string stringconexao = builder.GetConnectionString("ByteBankConnection");
             optionsBuilder.UseMySql(stringconexao, ServerVersion.AutoDetect(stringconexao));
         }
 
