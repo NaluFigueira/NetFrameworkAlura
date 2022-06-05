@@ -1,6 +1,7 @@
 ## Summary
 
 - [Architecture based on Domain Driven Design](#architecture-based-on-domain-driven-design)
+- [Dependency injection](#dependency-injection)
 
 ### Architecture based on Domain Driven Design
 
@@ -29,4 +30,6 @@ Let's look at the application and domain layers in more detail.
 - Contains service objects that only have a defined operational behavior which is not part of any domain object. Services encapsulate behavior of the business domain that doesn't fit in the domain objects themselves.
 - Is the heart of the business application and should be well isolated from the other layers of the application. Also, it should not be dependent on the application frameworks used in the other layers (JSP/JSF, Struts, EJB, Hibernate, XMLBeans and so-on).
 
+### Dependency injection (DI)
 
+For a complete overview of DI and its advantages check [this documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection).

@@ -1,34 +1,31 @@
-﻿using Alura.ByteBank.Dados.Contexto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Alura.ByteBank.Dados.Contexto;
 using Xunit;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
 {
     public class ByteBankContextoTestes
     {
-
         [Fact]
-        public void TestaConexaoContextoComBDMySQL()
+        public void TestaConexaoContextoComMySQL()
         {
             //Arrange
             var contexto = new ByteBankContexto();
             bool conectado;
+
             //Act
             try
             {
                 conectado = contexto.Database.CanConnect();
             }
-            catch (Exception e)
+            catch
             {
-                throw new Exception($"Não foi possível conectar a base de dados.[{e.Message}]");
-               
+                throw new Exception("Não foi poss[ivel conectar com a base de dados.");
             }
+
             //Assert
             Assert.True(conectado);
         }
+
     }
 }
