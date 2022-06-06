@@ -1,6 +1,7 @@
 ## Summary
 
 - [Architecture based on Domain Driven Design](#architecture-based-on-domain-driven-design)
+- [Add user secrets to a console application](#add-user-secrets-to-a-console-application)
 - [Dependency injection](#dependency-injection)
 
 ### Architecture based on Domain Driven Design
@@ -30,6 +31,22 @@ Let's look at the application and domain layers in more detail.
 - Contains service objects that only have a defined operational behavior which is not part of any domain object. Services encapsulate behavior of the business domain that doesn't fit in the domain objects themselves.
 - Is the heart of the business application and should be well isolated from the other layers of the application. Also, it should not be dependent on the application frameworks used in the other layers (JSP/JSF, Struts, EJB, Hibernate, XMLBeans and so-on).
 
+### Add user secrets to a console application
+
+1. [Configure appsettings.json](https://makolyte.com/csharp-how-to-read-custom-configuration-from-appsettings-json/).
+2. Install package `Microsoft.Extensions.Configuration.UserSecrets`.
+3. Add your user-secrets to the project.
+4. Include the user secrets keys in `appsettings.json` with a default value. The `appsettings.json` will be overwritten by the user secrets when application is built.
+5. Usage example:
+```csharp
+var builder = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<ByteBankContexto>()
+                .Build();
+string stringconexao = builder.GetConnectionString("ByteBankConnection");
+optionsBuilder.UseMySql(stringconexao, ServerVersion.AutoDetect(stringconexao));
+```
 ### Dependency injection (DI)
 
 For a complete overview of DI and its advantages check [this documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection).
