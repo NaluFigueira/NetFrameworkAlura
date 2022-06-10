@@ -30,8 +30,22 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             List<Cliente> lista = _repositorio.ObterTodos();
 
             //Assert
-            Assert.NotNull(lista);
+            Assert.NotEmpty(lista);
 
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void TestaObterContaPeloId(int id)
+        {
+            //Arrange
+
+            //Act
+            Cliente cliente = _repositorio.ObterPorId(id);
+
+            //Assert
+            Assert.Equal(id, cliente.Id);
         }
     }
 }

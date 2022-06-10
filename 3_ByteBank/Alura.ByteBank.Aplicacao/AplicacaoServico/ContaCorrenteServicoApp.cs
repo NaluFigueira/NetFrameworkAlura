@@ -38,7 +38,7 @@ namespace Alura.ByteBank.Aplicacao.AplicacaoServico
 
         public bool Atualizar(int id, ContaCorrenteDTO conta)
         {
-            return _servico.Atualizar(id, _mapper.Map<ContaCorrenteDTO, ContaCorrente>(conta));
+            return _servico.Atualizar(_mapper.Map<ContaCorrenteDTO, ContaCorrente>(conta));
         }
 
         public bool Excluir(int id)

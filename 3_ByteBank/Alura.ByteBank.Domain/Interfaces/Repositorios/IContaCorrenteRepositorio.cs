@@ -10,7 +10,7 @@ namespace Alura.ByteBank.Dominio.Interfaces.Repositorios
         public ContaCorrente ObterPorId(int id);
         public ContaCorrente ObterPorGuid(Guid guid);
         public bool Adicionar(ContaCorrente conta);
-        public bool Atualizar(int id, ContaCorrente conta);
+        public bool Atualizar(ContaCorrente conta);
         public bool Excluir(int id);
     }
 }

@@ -30,15 +30,11 @@ namespace Alura.ByteBank.Dados.Repositorio
             }
         }
 
-        public bool Atualizar(int id, ContaCorrente conta)
+        public bool Atualizar(ContaCorrente conta)
         {
 
             try
             {
-                if (id != conta.Id)
-                {
-                    return false;
-                }
                 _contexto.Entry(conta).State = EntityState.Modified;
                 _contexto.SaveChanges();
                 return true;

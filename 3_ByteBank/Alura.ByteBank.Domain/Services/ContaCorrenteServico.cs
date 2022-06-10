@@ -21,9 +21,9 @@ namespace Alura.ByteBank.Dominio.Services
            return _repositorio.Adicionar(conta);
         }
 
-        public bool Atualizar(int id, ContaCorrente conta)
+        public bool Atualizar(ContaCorrente conta)
         {
-            return _repositorio.Atualizar(id, conta);
+            return _repositorio.Atualizar(conta);
         }
 
         public bool Excluir(int id)
