@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Alura.ByteBank.Dados.Repositorio;
 using Alura.ByteBank.Dominio.Entidades;
 using Alura.ByteBank.Dominio.Interfaces.Repositorios;
+using Alura.ByteBank.Dominio.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Moq;
 using Xunit;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
@@ -60,5 +62,35 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             });
         }
 
+        [Fact]
+        public void TestaAgenciaServicoObterTodos()
+        {
+            //Arrange
+            var agenciaRepositorioMock = new Mock<IAgenciaRepositorio>();
+            var mock = agenciaRepositorioMock.Object;
+            var service = new AgenciaServico(mock);
+
+            //Act
+            var lista = service.ObterTodos();
+
+            //Asssert
+            agenciaRepositorioMock.Verify(agenciaRepositorio => agenciaRepositorio.ObterTodos());
+        }
+
+        [Fact]
+        public void TestaAgenciaServicoObterPorIdInvalido()
+        {
+            //Arrange
+            var agenciaRepositorioMock = new Mock<IAgenciaRepositorio>();
+            agenciaRepositorioMock.Setup(x => x.ObterPorId(-1)).Returns<Agencia>(null);
+            var mock = agenciaRepositorioMock.Object;
+            var service = new AgenciaServico(mock);
+
+            //Act
+            var agencia = service.ObterPorId(-1);
+
+            //Asssert
+            Assert.Null(agencia);
+        }
     }
 }
