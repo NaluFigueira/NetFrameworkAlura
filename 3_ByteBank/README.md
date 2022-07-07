@@ -3,6 +3,7 @@
 - [Architecture based on Domain Driven Design](#architecture-based-on-domain-driven-design)
 - [Add user secrets to a console application](#add-user-secrets-to-a-console-application)
 - [Dependency injection](#dependency-injection)
+- [Using Moq library](#using-moq-library)
 
 ### Architecture based on Domain Driven Design
 
@@ -50,3 +51,11 @@ optionsBuilder.UseMySql(stringconexao, ServerVersion.AutoDetect(stringconexao));
 ### Dependency injection (DI)
 
 For a complete overview of DI and its advantages check [this documentation](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection).
+
+### Using Moq library
+
+```csharp
+var agenciaRepositorioMock = new Mock<IAgenciaRepositorio>();
+var mock = agenciaRepositorioMock.Object;
+var service = new AgenciaServico(mock);
+```
