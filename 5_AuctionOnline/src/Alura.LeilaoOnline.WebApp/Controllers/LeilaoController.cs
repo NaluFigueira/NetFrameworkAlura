@@ -12,21 +12,14 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     {
 
         AppDbContext _context;
+        LeilaoDAO _dao;
 
         public LeilaoController()
         {
             _context = new AppDbContext();
+            _dao = new LeilaoDAO();
         }
-
-        public List<Categoria> GetCategories ()
-        {
-            return _context.Categorias.ToList();
-        }
-
-        public Leilao FindAuctionById(int id)
-        {
-            return _context.Leiloes.First(auction => auction.Id == id);
-        }
+        
 
         public IActionResult Index()
         {
@@ -38,7 +31,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpGet]
         public IActionResult Insert()
         {
-            ViewData["Categorias"] = GetCategories();
+            ViewData["Categorias"] = _dao.GetCategories();
             ViewData["Operacao"] = "Inclusão";
             return View("Form");
         }
@@ -48,11 +41,10 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Leiloes.Add(model);
-                _context.SaveChanges();
+                _dao.Add(model);
                 return RedirectToAction("Index");
             }
-            ViewData["Categorias"] = GetCategories();
+            ViewData["Categorias"] = _dao.GetCategories();
             ViewData["Operacao"] = "Inclusão";
             return View("Form", model);
         }
@@ -60,9 +52,9 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewData["Categorias"] = GetCategories();
+            ViewData["Categorias"] = _dao.GetCategories();
             ViewData["Operacao"] = "Edição";
-            var leilao = FindAuctionById(id);
+            var leilao = _dao.FindAuctionById(id);
             if (leilao == null) return NotFound();
             return View("Form", leilao);
         }
@@ -72,11 +64,10 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Leiloes.Update(model);
-                _context.SaveChanges();
+                _dao.Update(model);
                 return RedirectToAction("Index");
             }
-            ViewData["Categorias"] = GetCategories();
+            ViewData["Categorias"] = _dao.GetCategories();
             ViewData["Operacao"] = "Edição";
             return View("Form", model);
         }
@@ -84,37 +75,34 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpPost]
         public IActionResult Inicia(int id)
         {
-            var leilao = FindAuctionById(id);
+            var leilao = _dao.FindAuctionById(id);
             if (leilao == null) return NotFound();
             if (leilao.Situacao != SituacaoLeilao.Rascunho) return StatusCode(405);
             leilao.Situacao = SituacaoLeilao.Pregao;
             leilao.Inicio = DateTime.Now;
-            _context.Leiloes.Update(leilao);
-            _context.SaveChanges();
+            _dao.Update(leilao);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Finaliza(int id)
         {
-            var leilao = FindAuctionById(id);
+            var leilao = _dao.FindAuctionById(id);
             if (leilao == null) return NotFound();
             if (leilao.Situacao != SituacaoLeilao.Pregao) return StatusCode(405);
             leilao.Situacao = SituacaoLeilao.Finalizado;
             leilao.Termino = DateTime.Now;
-            _context.Leiloes.Update(leilao);
-            _context.SaveChanges();
+            _dao.Update(leilao);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Remove(int id)
         {
-            var leilao = FindAuctionById(id);
+            var leilao = _dao.FindAuctionById(id);
             if (leilao == null) return NotFound();
             if (leilao.Situacao == SituacaoLeilao.Pregao) return StatusCode(405);
-            _context.Leiloes.Remove(leilao);
-            _context.SaveChanges();
+            _dao.Delete(leilao);
             return NoContent();
         }
 
