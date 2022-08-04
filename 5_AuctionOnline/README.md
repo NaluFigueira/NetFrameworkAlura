@@ -1,6 +1,7 @@
 ## Summary
 
 - [Single responsibility](#single-responsibility)
+- [Dependency Inversion Principle](#dependency-inversion-principle)
 
 ### Single responsibility
 
@@ -50,3 +51,16 @@ Therefore what we need to do in this case is to separate responsibilities:
 2. Create a `EmployeeDAO` class that takes care of the interface to the database, including the `save` method.
 3. Create a `Operations` class that takes care of `reportHours` and other similar methods.
 4. The `Employee` class should only trigger those methods when necessary and not implement them.
+
+### Dependency Inversion Principle
+
+- Coupling
+Coupling means dependency between two types. In an object-oriented system coupled objects are inevitable, but we must be aware of their quality. Good coupling are for stable types, which are the ones that rarely change, e.g. primitive types and types from external libraries.
+Bad coupling is associated to unstable types, meaning the ones we created for our system, which we have control of.
+
+- The concept
+The 'D' in S.O.L.I.D stands for _Dependency Inversion Principle_ and it states that we should create abstractions and depend on those to improve the quality of coupling in our system.
+
+One way of doing this is to make explicit the dependencies of a class through the parameters of the its constructor. This method is called _Dependency Injection_. 
+
+When the class no longer resolves those dependencies directly and gives their control to others, it's called _Inversion of control_.
