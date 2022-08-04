@@ -19,5 +19,9 @@
   <ItemGroup>
     <None Remove="MySql.Data.EntityFrameworkCore" />
     <None Remove="Microsoft.Extensions.Configuration.UserSecrets" />
+    <None Remove="Dados\EFCore\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dados\EFCore\" />
   </ItemGroup>
 </Project>

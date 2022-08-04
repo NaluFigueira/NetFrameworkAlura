@@ -1,4 +1,5 @@
 using Alura.LeilaoOnline.WebApp.Dados;
+using Alura.LeilaoOnline.WebApp.Dados.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,7 @@ namespace Alura.LeilaoOnline.WebApp
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILeilaoDAO, LeilaoDAO>();
             services
                 .AddControllersWithViews()
                 .AddNewtonsoftJson(options => 

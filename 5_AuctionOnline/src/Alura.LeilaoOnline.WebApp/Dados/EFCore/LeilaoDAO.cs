@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alura.LeilaoOnline.WebApp.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {
-    public class LeilaoDAO
+    public class LeilaoDAO : ILeilaoDAO
     {
         AppDbContext _context;
+
+
+        public LeilaoDAO()
+        {
+            _context = new AppDbContext();
+        }
 
         public List<Categoria> GetCategories()
         {
             return _context.Categorias.ToList();
         }
 
-        public LeilaoDAO()
+        public List<Leilao> GetAuctions()
         {
-            _context = new AppDbContext();
+            return _context.Leiloes.Include(l => l.Categoria).ToList();
         }
 
         public Leilao FindAuctionById(int id)

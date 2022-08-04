@@ -3,7 +3,7 @@ using Alura.LeilaoOnline.WebApp.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {
     public class AppDbContext : DbContext
     {
