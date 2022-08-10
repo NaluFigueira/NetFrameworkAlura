@@ -1,6 +1,7 @@
 ## Summary
 
 - [Single responsibility](#single-responsibility)
+- [Open Closed Principle](#open-closed-principle)
 - [Dependency Inversion Principle](#dependency-inversion-principle)
 
 ### Single responsibility
@@ -51,6 +52,24 @@ Therefore what we need to do in this case is to separate responsibilities:
 2. Create a `EmployeeDAO` class that takes care of the interface to the database, including the `save` method.
 3. Create a `Operations` class that takes care of `reportHours` and other similar methods.
 4. The `Employee` class should only trigger those methods when necessary and not implement them.
+
+### Open Closed Principle
+
+> You should be able to extend the behavior of a system without having to modify that system.
+
+[Open Closed Principle, by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html)
+
+One way of applying that principle is by creating a service layer.
+
+> A Service Layer defines an application's boundary and its set of available operations from the perspective of interfacing client layers. It encapsulates the application's **business logic, controlling transactions and coor-dinating responses** in the implementation of its operations.
+
+[Service layer, by Randy Stafford](https://martinfowler.com/eaaCatalog/serviceLayer.html)
+
+When extension is needed, we can use the [decorator pattern](https://refactoring.guru/design-patterns/decorator).
+
+This pattern allow us to create a new service class, that implements the same interface as the default service class, and then we create new methods and/or override methods we want to modify in the new service class.
+
+The new service class should have an instance of the default service class, that way, for the methods that should keep the default behavior, it's possible to call them directly from the default service instance.
 
 ### Dependency Inversion Principle
 
