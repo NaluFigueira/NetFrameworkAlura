@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Alura.LeilaoOnline.WebApp.Models;
 using Alura.LeilaoOnline.WebApp.Dados;
+using Alura.LeilaoOnline.WebApp.Services;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
 {
@@ -8,24 +9,24 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     [Route("/api/leiloes")]
     public class LeilaoApiController : ControllerBase
     {
-        ILeilaoDAO _dao; 
+        IAdminService _service;
 
-        public LeilaoApiController(ILeilaoDAO dao)
+        public LeilaoApiController(IAdminService service)
         {
-            _dao = dao;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult EndpointGetLeiloes()
         {
-            var leiloes = _dao.GetAuctions();
+            var leiloes = _service.GetAuctions();
             return Ok(leiloes);
         }
 
         [HttpGet("{id}")]
         public IActionResult EndpointGetLeilaoById(int id)
         {
-            var leilao = _dao.FindAuctionById(id);
+            var leilao = _service.FindAuctionById(id);
             if (leilao == null)
             {
                 return NotFound();
@@ -36,21 +37,21 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpPost]
         public IActionResult EndpointPostLeilao(Leilao leilao)
         {
-            _dao.Add(leilao);
+            _service.Add(leilao);
             return Ok(leilao);
         }
 
         [HttpPut]
         public IActionResult EndpointPutLeilao(Leilao leilao)
         {
-            _dao.Update(leilao);
+            _service.Update(leilao);
             return Ok(leilao);
         }
 
         [HttpDelete("{id}")]
         public IActionResult EndpointDeleteLeilao(int id)
         {
-            var leilao = _dao.FindAuctionById(id);
+            var leilao = _service.FindAuctionById(id);
             if (leilao == null)
             {
                 return NotFound();

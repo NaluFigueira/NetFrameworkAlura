@@ -20,8 +20,12 @@
     <None Remove="MySql.Data.EntityFrameworkCore" />
     <None Remove="Microsoft.Extensions.Configuration.UserSecrets" />
     <None Remove="Dados\EFCore\" />
+    <None Remove="Services\" />
+    <None Remove="Services\Handlers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dados\EFCore\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Handlers\" />
   </ItemGroup>
 </Project>
