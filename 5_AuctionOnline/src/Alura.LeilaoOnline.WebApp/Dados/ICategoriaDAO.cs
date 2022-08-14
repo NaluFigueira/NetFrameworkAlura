@@ -4,11 +4,9 @@ using Alura.LeilaoOnline.WebApp.Models;
 
 namespace Alura.LeilaoOnline.WebApp.Dados
 {
-    public interface ICategoriaDAO
+    public interface ICategoriaDAO : IQuery<Categoria>
     {
 
-        public List<Categoria> GetCategories();
-        public Categoria GetCategoryById(int id);
         public IEnumerable<Categoria> GetCategoriesWithAuctionsTotal();
     }
 }

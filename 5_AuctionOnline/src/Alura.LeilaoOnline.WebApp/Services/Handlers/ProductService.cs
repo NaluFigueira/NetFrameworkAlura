@@ -18,7 +18,7 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
 
         public Categoria GetCategoriesByIdWithOpenAuctions(int id)
         {
-            return _categoriaDao.GetCategoryById(id);
+            return _categoriaDao.GetById(id);
         }
 
         public IEnumerable<Categoria> GetCategoriesWithAuctionsTotal()

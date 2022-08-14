@@ -18,17 +18,17 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
 
         public IEnumerable<Categoria> GetCategories()
         {
-            return _categoriaDao.GetCategories();
+            return _categoriaDao.GetAll();
         }
 
         public IEnumerable<Leilao> GetAuctions()
         {
-            return _leilaoDao.GetAuctions();
+            return _leilaoDao.GetAll();
         }
 
         public Leilao FindAuctionById(int id)
         {
-            return _leilaoDao.FindAuctionById(id);
+            return _leilaoDao.GetById(id);
         }
 
         public void Add(Leilao auction)
@@ -56,7 +56,7 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
 
         public void StartAuctionUsingId(int id)
         {
-            var leilao = _leilaoDao.FindAuctionById(id);
+            var leilao = _leilaoDao.GetById(id);
             if (leilao.Situacao == SituacaoLeilao.Rascunho)
             {
                 leilao.Situacao = SituacaoLeilao.Pregao;
@@ -67,7 +67,7 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
 
         public void FinishAuctionUsingId(int id)
         {
-            var leilao = _leilaoDao.FindAuctionById(id);
+            var leilao = _leilaoDao.GetById(id);
             if (leilao != null && leilao.Situacao == SituacaoLeilao.Pregao)
             {
                 leilao.Situacao = SituacaoLeilao.Finalizado;

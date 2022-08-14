@@ -17,12 +17,12 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
         }
 
 
-        public List<Leilao> GetAuctions()
+        public IEnumerable<Leilao> GetAll()
         {
             return _context.Leiloes.Include(l => l.Categoria).ToList();
         }
 
-        public Leilao FindAuctionById(int id)
+        public Leilao GetById(int id)
         {
             return _context.Leiloes.First(auction => auction.Id == id);
         }
@@ -47,9 +47,6 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
             _context.Leiloes.Update(auction);
             _context.SaveChanges();
         }
-
-        
-
         public void Delete(Leilao auction)
         {
             _context.Leiloes.Remove(auction);

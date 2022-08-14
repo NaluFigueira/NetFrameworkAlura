@@ -16,12 +16,12 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
             _context = new AppDbContext();
         }
 
-        public List<Categoria> GetCategories()
+        public IEnumerable<Categoria> GetAll()
         {
             return _context.Categorias.ToList();
         }
 
-        public Categoria GetCategoryById(int id)
+        public Categoria GetById(int id)
         {
             return _context.Categorias
                 .Include(c => c.Leiloes)
